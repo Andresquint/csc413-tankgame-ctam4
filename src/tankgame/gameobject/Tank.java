@@ -66,22 +66,27 @@ public class Tank extends GameMovableObject {
     }
 
     public void toggleLeft() {
+        System.out.println(this.getClass().getSimpleName() + " - toggleLeft()");
         this.left ^= true;
     }
 
     public void toggleUp() {
+        System.out.println(this.getClass().getSimpleName() + " - toggleUp()");
         this.up ^= true;
     }
 
     public void toggleDown() {
+        System.out.println(this.getClass().getSimpleName() + " - toggleDown()");
         this.down ^= true;
     }
 
     public void toggleRight() {
+        System.out.println(this.getClass().getSimpleName() + " - toggleRight()");
         this.right ^= true;
     }
 
     public void toggleFire() {
+        System.out.println(this.getClass().getSimpleName() + " - toggleFire()");
         this.fire ^= true;
     }
 }

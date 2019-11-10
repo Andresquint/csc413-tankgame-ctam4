@@ -29,6 +29,10 @@ public class Launcher {
         new Launcher();
     }
 
+    public Gameworld getGameworld() {
+        return (Gameworld) this.gameworld;
+    }
+
     protected BufferedImage getResource(String key) {
         return this.resources.get(key);
     }
