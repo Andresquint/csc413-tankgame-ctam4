@@ -16,7 +16,7 @@ public abstract class GameMovableObject extends GameObject {
         this.angle = angle;
     }
 
-    protected abstract void update();
+    public abstract void update();
 
     @Override
     public void draw(Graphics g) {

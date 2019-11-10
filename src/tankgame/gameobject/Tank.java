@@ -21,7 +21,7 @@ public class Tank extends GameMovableObject {
         this.left = this.up = this.down = this.right = this.fire = false;
     }
 
-    protected void update() {
+    public void update() {
         if (this.left) {
             turnLeft();
         }
