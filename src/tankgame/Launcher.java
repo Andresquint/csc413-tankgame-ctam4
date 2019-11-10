@@ -63,5 +63,6 @@ public class Launcher {
     public void quit() {
         this.gameworld.close();
         this.splash.close();
+        System.exit(0);
     }
 }
