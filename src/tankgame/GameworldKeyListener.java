@@ -1,10 +1,12 @@
+package tankgame;
+
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
 public class GameworldKeyListener implements KeyListener {
-    private TankGame app;
+    private Launcher app;
 
-    public GameworldKeyListener(TankGame app) {
+    public GameworldKeyListener(Launcher app) {
         // set app reference
         this.app = app;
     }

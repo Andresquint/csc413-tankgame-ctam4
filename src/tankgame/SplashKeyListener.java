@@ -1,10 +1,12 @@
+package tankgame;
+
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
 public class SplashKeyListener implements KeyListener {
-    private TankGame app;
+    private Launcher app;
 
-    public SplashKeyListener(TankGame app) {
+    public SplashKeyListener(Launcher app) {
         // set app reference
         this.app = app;
     }

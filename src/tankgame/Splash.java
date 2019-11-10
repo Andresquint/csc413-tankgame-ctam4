@@ -1,3 +1,5 @@
+package tankgame;
+
 import java.awt.DisplayMode;
 import java.awt.GraphicsEnvironment;
 import java.awt.Dimension;
@@ -12,7 +14,7 @@ import javax.swing.BorderFactory;
 public class Splash extends JContainer {
     private JPanel panel;
 
-    public Splash(TankGame app) {
+    public Splash(Launcher app) {
         super(app);
         // set width & height
         this.width = 0.4;

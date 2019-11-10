@@ -1,15 +1,17 @@
+package tankgame;
+
 import java.util.HashMap;
 import java.io.File;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
-public class TankGame {
+public class Launcher {
     private JContainer splash, gameworld;
 
     private HashMap<String, BufferedImage> resources;
     private HashMap<String, String> strings;
 
-    public TankGame() {
+    public Launcher() {
         // initialize resource & strings
         resources = new HashMap<>();
         strings = new HashMap<>();
@@ -25,7 +27,7 @@ public class TankGame {
     }
 
     public static void main(String[] args) {
-        new TankGame();
+        new Launcher();
     }
 
     protected BufferedImage getResource(String key) {

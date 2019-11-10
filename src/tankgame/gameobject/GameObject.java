@@ -1,3 +1,5 @@
+package tankgame.gameobject;
+
 import java.awt.image.BufferedImage;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -12,8 +14,7 @@ public abstract class GameObject {
         this.y = y;
     }
 
-    protected void drawImage(Graphics graphics) {
-        Graphics2D graphics2d = (Graphics2D) graphics;
-        graphics2d.drawImage(this.image, this.x, this.y, null);
+    public void draw(Graphics g) {
+        g.drawImage(this.image, this.x, this.y, null);
     }
 }

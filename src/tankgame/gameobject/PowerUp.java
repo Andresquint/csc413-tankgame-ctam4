@@ -1,3 +1,5 @@
+package tankgame.gameobject;
+
 import java.awt.image.BufferedImage;
 
 public class PowerUp extends GameObject {

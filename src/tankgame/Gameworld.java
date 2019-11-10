@@ -1,19 +1,20 @@
+package tankgame;
+
 import java.awt.DisplayMode;
 import java.awt.GraphicsEnvironment;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.ImageIcon;
-import javax.swing.SpringLayout;
 
 public class Gameworld extends JContainer {
-    private JPanel panel_1, panel_2;
+    private JCustomPanel panel_1, panel_2;
 
-    public Gameworld(TankGame app) {
+    public Gameworld(Launcher app) {
         super(app);
         // set width & height
         this.width = 0.8;
@@ -49,9 +50,12 @@ public class Gameworld extends JContainer {
         System.out.println(this.getClass().getSimpleName() + " - Gameworld() - Get screen size: " + device.getWidth() + "x" + device.getHeight());
         this.frame.setSize(new Dimension((int) (device.getWidth() * this.width), (int) (device.getHeight() * this.height)));
         this.frame.setMaximumSize(this.frame.getSize());
-        // create JPanel objects
-        this.panel_1 = new JPanel();
-        this.panel_2 = new JPanel();
+        // create JCustomPanel objects
+        this.panel_1 = new JCustomPanel();
+        this.panel_2 = new JCustomPanel();
+        // set panels layout
+        this.panel_1.setLayout(new BorderLayout());
+        this.panel_2.setLayout(new BorderLayout());
         // set panels size
         Dimension size = new Dimension((int) (this.frame.getSize().getWidth() * 0.5), (int) this.frame.getSize().getHeight());
         this.panel_1.setSize(size);
@@ -71,8 +75,6 @@ public class Gameworld extends JContainer {
         this.frame.add(splitPane);
         // bind GameworldKeyListener to frame
         this.frame.addKeyListener(new GameworldKeyListener(this.app));
-        // focus keyboard to frame
-        this.frame.requestFocus();
     }
 
     private void playerInfoBar() {
