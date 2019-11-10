@@ -19,9 +19,8 @@ public class Launcher {
         putResource("icon", "../resources/icon.ico");
         // TODO import strings
         putString("name", "Tank Game");
-        // initialize JFRame objects
+        // initialize JContainer object
         this.splash = new Splash(this);
-        this.gameworld = new Gameworld(this);
         // ready to splash
         this.splash.show();
     }
@@ -52,16 +51,18 @@ public class Launcher {
 
     public void start() {
         this.splash.hide();
+        // initialize JContainer object
+        this.gameworld = new Gameworld(this);
+        // ready to game
         this.gameworld.show();
     }
 
     public void reset() {
-        this.gameworld.hide();
+        this.gameworld.close();
         this.splash.show();
     }
 
     public void quit() {
-        this.gameworld.close();
         this.splash.close();
         System.exit(0);
     }
