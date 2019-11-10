@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class TankGame {
-    private JContainer splash;
+    private JContainer splash, gameworld;
 
     private HashMap<String, BufferedImage> resources;
     private HashMap<String, String> strings;
@@ -19,6 +19,7 @@ public class TankGame {
         putString("name", "Tank Game");
         // initialize JFRame objects
         this.splash = new Splash(this);
+        this.gameworld = new Gameworld(this);
         // ready to splash
         this.splash.show();
     }
@@ -49,13 +50,16 @@ public class TankGame {
 
     public void start() {
         this.splash.hide();
+        this.gameworld.show();
     }
 
     public void reset() {
+        this.gameworld.hide();
         this.splash.show();
     }
 
     public void quit() {
+        this.gameworld.close();
         this.splash.close();
     }
 }
