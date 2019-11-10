@@ -12,6 +12,7 @@ import tankgame.gameobject.GameObject;
 import tankgame.gameobject.GameMovableObject;
 
 public class JCustomPanel extends JPanel implements ActionListener {
+    public Timer timer;
     public ArrayList<GameObject> gameObjects;
     public ArrayList<GameMovableObject> gameMovableObjects;
 
@@ -21,11 +22,12 @@ public class JCustomPanel extends JPanel implements ActionListener {
         gameObjects = new ArrayList<>();
         gameMovableObjects = new ArrayList<>();
         // set & start timer
-        Timer timer = new Timer(50, this);
+        timer = new Timer(200, this);
         timer.start();
     }
 
     public void actionPerformed(ActionEvent e) {
+        System.out.println(this.getClass().getSimpleName() + " - actionPerformed()");
         // update objects on gameMovableObjects
         gameMovableObjects.forEach((n) -> n.update());
         // repaint automatically
