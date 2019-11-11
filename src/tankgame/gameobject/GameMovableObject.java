@@ -9,15 +9,13 @@ import java.lang.Math;
 import tankgame.Launcher;
 
 public abstract class GameMovableObject extends GameObject {
-    protected int vx, vy, angle, offsetX, offsetY, maxX, maxY;
+    protected int vx, vy, angle, maxX, maxY;
 
-    protected GameMovableObject(Launcher app, BufferedImage image, int x, int y, int vx, int vy, int angle, int offsetX, int offsetY, int maxX, int maxY) {
+    protected GameMovableObject(Launcher app, BufferedImage image, int x, int y, int vx, int vy, int angle, int maxX, int maxY) {
         super(app, image, x, y);
         this.vx = vx;
         this.vy = vy;
         this.angle = angle;
-        this.offsetX = offsetX;
-        this.offsetY = offsetY;
         this.maxX = maxX;
         this.maxY = maxY;
     }
@@ -30,7 +28,7 @@ public abstract class GameMovableObject extends GameObject {
 
     @Override
     public void draw(Graphics g) {
-        AffineTransform rotation = AffineTransform.getTranslateInstance(this.x + this.offsetX, this.y + this.offsetY);
+        AffineTransform rotation = AffineTransform.getTranslateInstance(this.x, this.y);
         rotation.scale(this.app.getScale(), this.app.getScale());
         rotation.rotate(Math.toRadians(this.angle), this.image.getWidth() / 2.0, this.image.getHeight() / 2.0);
         Graphics2D g2d = (Graphics2D) g;
