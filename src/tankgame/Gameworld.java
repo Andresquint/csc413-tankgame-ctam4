@@ -1,5 +1,6 @@
 package tankgame;
 
+import java.lang.IllegalArgumentException;
 import java.awt.DisplayMode;
 import java.awt.GraphicsEnvironment;
 import java.awt.Dimension;
@@ -11,8 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.JSplitPane;
 import javax.swing.ImageIcon;
 
+import tankgame.gameobject.*;
+
 public class Gameworld extends JContainer {
     private JCustomPanel panel_1, panel_2;
+
+    private Tank tank_1, tank_2;
 
     public Gameworld(Launcher app) {
         super(app);
@@ -57,7 +62,7 @@ public class Gameworld extends JContainer {
         this.panel_1.setLayout(new BorderLayout());
         this.panel_2.setLayout(new BorderLayout());
         // set panels size
-        Dimension size = new Dimension((int) (this.frame.getSize().getWidth() * 0.5), (int) this.frame.getSize().getHeight());
+        Dimension size = new Dimension((int) (this.frame.getWidth() * 0.5), (int) this.frame.getHeight());
         this.panel_1.setSize(size);
         this.panel_2.setSize(size);
         // set panels visible
@@ -100,6 +105,17 @@ public class Gameworld extends JContainer {
         this.panel_2.add(player_2);
         // set player_2 lives to panel_2
         // TODO
+    }
+
+    public Tank getPlayerTank(int player) {
+        switch (player) {
+            case 1:
+                return this.tank_1;
+            case 2:
+                return this.tank_2;
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     @Override
