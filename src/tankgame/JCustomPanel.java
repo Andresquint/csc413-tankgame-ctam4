@@ -72,7 +72,7 @@ public class JCustomPanel extends JPanel implements ActionListener {
 
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponents(g);
+        super.paintComponent(g);
         // draw objects on gameObjects & gameMovableObjects
         this.gameObjects.forEach((n) -> n.draw(g));
         this.gameMovableObjects.forEach((n) -> n.draw(g));
