@@ -101,4 +101,11 @@ public class Gameworld extends JContainer {
         // set player_2 lives to panel_2
         // TODO
     }
+
+    @Override
+    protected void close() {
+        this.panel_1.timer.stop();
+        this.panel_2.timer.stop();
+        super.close();
+    }
 }
