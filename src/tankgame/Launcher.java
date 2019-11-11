@@ -3,6 +3,8 @@ package tankgame;
 import java.util.HashMap;
 import java.io.File;
 import java.awt.image.BufferedImage;
+import java.awt.DisplayMode;
+import java.awt.GraphicsEnvironment;
 import javax.imageio.ImageIO;
 
 public class Launcher {
@@ -10,6 +12,8 @@ public class Launcher {
 
     private HashMap<String, BufferedImage> resources;
     private HashMap<String, String> strings;
+
+    private double scale;
 
     public Launcher() {
         // initialize resource & strings
@@ -19,6 +23,11 @@ public class Launcher {
         putResource("icon", "../resources/icon.ico");
         // TODO import strings
         putString("name", "Tank Game");
+        // get current screen size
+        DisplayMode device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode();
+        System.out.println(this.getClass().getSimpleName() + " - Launcher() - Get screen size: " + device.getWidth() + "x" + device.getHeight());
+        this.scale = device.getWidth() / 1920.0;
+        System.out.println(this.getClass().getSimpleName() + " - Launcher() - Set scale: " + getScale());
         // initialize JContainer object
         this.splash = new Splash(this);
         // ready to splash
@@ -51,6 +60,10 @@ public class Launcher {
 
     protected void putString(String key, String value) {
         this.strings.put(key, value);
+    }
+
+    public double getScale() {
+        return this.scale;
     }
 
     public void start() {

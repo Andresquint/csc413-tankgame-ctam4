@@ -5,6 +5,8 @@ import java.awt.geom.AffineTransform;
 import java.lang.Math;
 import javax.swing.JPanel;
 
+import tankgame.Launcher;
+
 public class Tank extends GameMovableObject {
     private final int R = 5;
     private final int ROTATESPEED = 10;
@@ -13,8 +15,8 @@ public class Tank extends GameMovableObject {
 
     private boolean left, up, down, right, fire;
 
-    public Tank(BufferedImage image, int x, int y, int vx, int vy, int angle, int offsetX, int offsetY, int maxX, int maxY) {
-        super(image, x, y, vx, vy, angle, offsetX, offsetY, maxX, maxY);
+    public Tank(Launcher app, BufferedImage image, int x, int y, int vx, int vy, int angle, int offsetX, int offsetY, int maxX, int maxY) {
+        super(app, image, x, y, vx, vy, angle, offsetX, offsetY, maxX, maxY);
         this.health = 1.0;
         this.left = this.up = this.down = this.right = this.fire = false;
     }
