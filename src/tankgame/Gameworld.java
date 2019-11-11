@@ -88,8 +88,8 @@ public class Gameworld extends JContainer {
         JLabel player_1 = new JLabel();
         player_1.setText(this.app.getString("Gameworld/player_1"));
         player_1.setFont(font);
-        //player_1.setMaximumSize(new Dimension((int) (this.panel_1.getSize().getWidth()), (int) (this.panel_1.getSize().getHeight() * 0.05)));
-        player_1.setHorizontalAlignment(JLabel.CENTER);
+        player_1.setMinimumSize(new Dimension(this.panel_1.getWidth(), 0));
+        player_1.setHorizontalAlignment(JLabel.LEFT);
         player_1.setVerticalAlignment(JLabel.BOTTOM);
         player_1.setBackground(new Color(0,0,0));
         this.panel_1.add(player_1);
@@ -99,8 +99,8 @@ public class Gameworld extends JContainer {
         JLabel player_2 = new JLabel();
         player_2.setText(this.app.getString("Gameworld/player_2"));
         player_2.setFont(font);
-        //player_2.setMaximumSize(new Dimension((int) (this.panel_2.getSize().getWidth()), (int) (this.panel_2.getSize().getHeight() * 0.05)));
-        player_2.setHorizontalAlignment(JLabel.CENTER);
+        player_2.setMinimumSize(new Dimension(this.panel_2.getWidth(), 0));
+        player_2.setHorizontalAlignment(JLabel.RIGHT);
         player_2.setVerticalAlignment(JLabel.BOTTOM);
         this.panel_2.add(player_2);
         // set player_2 lives to panel_2
