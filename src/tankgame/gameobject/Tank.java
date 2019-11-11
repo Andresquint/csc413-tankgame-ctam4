@@ -1,9 +1,7 @@
 package tankgame.gameobject;
 
 import java.awt.image.BufferedImage;
-import java.awt.geom.AffineTransform;
 import java.lang.Math;
-import javax.swing.JPanel;
 
 import tankgame.Launcher;
 

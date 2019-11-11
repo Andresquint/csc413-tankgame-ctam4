@@ -19,17 +19,17 @@ public class JCustomPanel extends JPanel implements ActionListener {
     public JCustomPanel() {
         super();
         // initialize gameObjects & gameMovableObjects
-        gameObjects = new ArrayList<>();
-        gameMovableObjects = new ArrayList<>();
+        this.gameObjects = new ArrayList<>();
+        this.gameMovableObjects = new ArrayList<>();
         // set & start timer
-        timer = new Timer(200, this);
-        timer.start();
+        this.timer = new Timer(200, this);
+        this.timer.start();
     }
 
     public void actionPerformed(ActionEvent e) {
         System.out.println(this.getClass().getSimpleName() + " - actionPerformed()");
         // update objects on gameMovableObjects
-        gameMovableObjects.forEach((n) -> n.update());
+        this.gameMovableObjects.forEach((n) -> n.update());
         // repaint automatically
         repaint();
     }
@@ -38,7 +38,7 @@ public class JCustomPanel extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponents(g);
         // draw objects on gameObjects & gameMovableObjects
-        gameObjects.forEach((n) -> n.draw(g));
-        gameMovableObjects.forEach((n) -> n.draw(g));
+        this.gameObjects.forEach((n) -> n.draw(g));
+        this.gameMovableObjects.forEach((n) -> n.draw(g));
     }
 }
