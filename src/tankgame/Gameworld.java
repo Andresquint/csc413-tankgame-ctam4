@@ -7,10 +7,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.BorderLayout;
+import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSplitPane;
 import javax.swing.ImageIcon;
+import java.lang.Math;
 
 import tankgame.gameobject.*;
 
@@ -70,6 +72,8 @@ public class Gameworld extends JContainer {
         this.panel_2.setVisible(true);
         // set player info bar
         playerInfoBar();
+        // set GameObjects
+        addGameObjects();
         // create JSplitPane object
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, this.panel_1, this.panel_2);
         // remove splitPane divider
@@ -105,6 +109,33 @@ public class Gameworld extends JContainer {
         this.panel_2.add(player_2);
         // set player_2 lives to panel_2
         // TODO
+    }
+
+    private void addGameObjects() {
+        BufferedImage image;
+        int unitX, unitY;
+        // get unitX & unitY for unbreakable wall
+        image = this.app.getResource("Gameworld/wall_1");
+        unitX = (int) Math.round(image.getWidth() * this.app.getScale());
+        unitY = (int) Math.round(image.getHeight() * this.app.getScale());
+        // add unbreakable walls on border to panel_1
+        for (int x = 0; x < this.panel_1.getWidth() / unitX; x++) {
+            for (int y = 0; y < this.panel_1.getHeight() / unitY; y++) {
+                if (x >= 1 && y >= 1 && (y < this.panel_1.getHeight() / unitY - 2) || y > this.panel_1.getHeight() / unitY - 2) {
+                    continue;
+                }
+                this.panel_1.gameObjects.add(new Wall(this.app, image, x * unitX, y * unitY, false));
+            }
+        }
+        // add unbreakable walls on border to panel_2
+        for (int x = 0; x < this.panel_2.getWidth() / unitX; x++) {
+            for (int y = 0; y < this.panel_2.getHeight() / unitY; y++) {
+                if (x >= 0 && x < this.panel_2.getWidth() / unitX - 1 && y >= 1 && (y < this.panel_2.getHeight() / unitY - 2) || y > this.panel_2.getHeight() / unitY - 2) {
+                    continue;
+                }
+                this.panel_2.gameObjects.add(new Wall(this.app, image, x * unitX, y * unitY, false));
+            }
+        }
     }
 
     public Tank getPlayerTank(int player) {
