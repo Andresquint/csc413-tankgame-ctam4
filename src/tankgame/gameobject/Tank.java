@@ -6,17 +6,15 @@ import java.lang.Math;
 import javax.swing.JPanel;
 
 public class Tank extends GameMovableObject {
-    private final int R = 2;
+    private final int R = 5;
     private final int ROTATESPEED = 10;
 
-    private JPanel panel;
     private double health;
 
     private boolean left, up, down, right, fire;
 
-    public Tank(BufferedImage image, int x, int y, int vx, int vy, int angle, JPanel panel) {
-        super(image, x, y, vx, vy, angle);
-        this.panel = panel;
+    public Tank(BufferedImage image, int x, int y, int vx, int vy, int angle, int offsetX, int offsetY, int maxX, int maxY) {
+        super(image, x, y, vx, vy, angle, offsetX, offsetY, maxX, maxY);
         this.health = 1.0;
         this.left = this.up = this.down = this.right = this.fire = false;
     }
@@ -46,15 +44,19 @@ public class Tank extends GameMovableObject {
     private void drive() {
         this.vx = (int) Math.round(this.R * Math.cos(Math.toRadians(this.angle)));
         this.vy = (int) Math.round(this.R * Math.sin(Math.toRadians(this.angle)));
-        this.x += this.vx;
-        this.y += this.vy;
+        if (validPosition(this.x + this.vx, this.y + this.vy)) {
+            this.x += this.vx;
+            this.y += this.vy;
+        }
     }
 
     private void reverse() {
         this.vx = (int) Math.round(this.R * Math.cos(Math.toRadians(this.angle)));
         this.vy = (int) Math.round(this.R * Math.sin(Math.toRadians(this.angle)));
-        this.x -= this.vx;
-        this.y -= this.vy;
+        if (validPosition(this.x - this.vx, this.y - this.vy)) {
+            this.x -= this.vx;
+            this.y -= this.vy;
+        }
     }
 
     private void turnRight() {
@@ -65,28 +67,28 @@ public class Tank extends GameMovableObject {
         // TODO
     }
 
-    public void toggleLeft() {
+    public void toggleLeft(boolean value) {
         System.out.println(this.getClass().getSimpleName() + " - toggleLeft()");
-        this.left ^= true;
+        this.left = value;
     }
 
-    public void toggleUp() {
+    public void toggleUp(boolean value) {
         System.out.println(this.getClass().getSimpleName() + " - toggleUp()");
-        this.up ^= true;
+        this.up = value;
     }
 
-    public void toggleDown() {
+    public void toggleDown(boolean value) {
         System.out.println(this.getClass().getSimpleName() + " - toggleDown()");
-        this.down ^= true;
+        this.down = value;
     }
 
-    public void toggleRight() {
+    public void toggleRight(boolean value) {
         System.out.println(this.getClass().getSimpleName() + " - toggleRight()");
-        this.right ^= true;
+        this.right = value;
     }
 
-    public void toggleFire() {
+    public void toggleFire(boolean value) {
         System.out.println(this.getClass().getSimpleName() + " - toggleFire()");
-        this.fire ^= true;
+        this.fire = value;
     }
 }
