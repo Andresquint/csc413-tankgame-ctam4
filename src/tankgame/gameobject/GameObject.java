@@ -38,6 +38,8 @@ public abstract class GameObject {
         return this.y;
     }
 
+    public abstract boolean onCollision(GameObject gameObject);
+
     public void draw(Graphics g) {
         g.drawImage(this.image, this.x, this.y, this.width, this.height, null);
     }

@@ -64,6 +64,18 @@ public class JCustomPanel extends JPanel implements ActionListener {
             // check collision on gameMovableObjects
             for (GameObject m : checkCollision(n)) {
                 // TODO
+                if (m.onCollision(n)) {
+                    switch (m.getClass().getSuperclass().getSimpleName()) {
+                        case "GameObject":
+                            this.gameObjects.remove(m);
+                            break;
+                        case "GameMovableObject":
+                            this.gameMovableObjects.remove(m);
+                            break;
+                        default:
+                            System.out.println("Failed");
+                    }
+                }
             }
         });
         // repaint automatically
