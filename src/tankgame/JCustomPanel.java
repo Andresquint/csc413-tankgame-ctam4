@@ -26,10 +26,46 @@ public class JCustomPanel extends JPanel implements ActionListener {
         this.timer.start();
     }
 
+    private boolean checkCollision(final GameObject gameObject_1, final GameObject gameObject_2) {
+        boolean x, y;
+        x = (gameObject_1.getX() >= gameObject_2.getX()
+        && gameObject_1.getX() <= gameObject_2.getX() + gameObject_2.getWidth())
+        || (gameObject_1.getX() + gameObject_1.getWidth() >= gameObject_2.getX()
+        && gameObject_1.getX() + gameObject_1.getWidth() <= gameObject_2.getX() + gameObject_2.getWidth());
+        y = (gameObject_1.getY() >= gameObject_2.getY()
+        && gameObject_1.getY() <= gameObject_2.getY() + gameObject_2.getHeight())
+        || (gameObject_1.getY() + gameObject_1.getHeight() >= gameObject_2.getY()
+        && gameObject_1.getY() + gameObject_1.getHeight() <= gameObject_2.getY() + gameObject_2.getHeight());
+        return (x && y);
+    }
+
+    private ArrayList<GameObject> checkCollision(final GameMovableObject gameMovableObject) {
+        ArrayList<GameObject> collidedGameObjects = new ArrayList<>();
+        // check collision on gameObjects
+        this.gameObjects.forEach((n) -> {
+            if (checkCollision(gameMovableObject, n)) {
+                collidedGameObjects.add(n);
+            }
+        });
+        // check collision on gameMovableObjects
+        this.gameMovableObjects.forEach((n) -> {
+            if (!gameMovableObject.equals(n) && checkCollision(gameMovableObject, n)) {
+                collidedGameObjects.add(n);
+            }
+        });
+        return collidedGameObjects;
+    }
+
     public void actionPerformed(ActionEvent e) {
         System.out.println(this.getClass().getSimpleName() + " - actionPerformed()");
-        // update objects on gameMovableObjects
-        this.gameMovableObjects.forEach((n) -> n.update());
+        this.gameMovableObjects.forEach((n) -> {
+            // update objects on gameMovableObjects
+            n.update();
+            // check collision on gameMovableObjects
+            for (GameObject m : checkCollision(n)) {
+                // TODO
+            }
+        });
         // repaint automatically
         repaint();
     }
