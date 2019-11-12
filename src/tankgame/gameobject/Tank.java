@@ -63,6 +63,7 @@ public class Tank extends GameMovableObject {
             shoot();
             this.fire = false;
         }
+        this.app.getGameworld().addPlayerTankHealthInfo();
     }
 
     private void turnLeft() {

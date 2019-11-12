@@ -110,7 +110,31 @@ public class Gameworld extends JContainer {
         player_2.setVisible(true);
         this.panel_2.add(player_2);
         // set player_2 lives to panel_2
-        // TODO
+        // font for tank_1_health & tank
+        font = new Font(Font.MONOSPACED, Font.PLAIN, 30);
+        // set tank_1_health to panel_1
+        this.tank_1_health = new JLabel();
+        this.tank_1_health.setFont(font);
+        //this.tank_1_health.setForeground(Color.GRAY);
+        this.tank_1_health.setHorizontalAlignment(JLabel.LEFT);
+        this.tank_1_health.setVerticalAlignment(JLabel.BOTTOM);
+        this.tank_1_health.setOpaque(false);
+        this.tank_1_health.setVisible(true);
+        player_1.add(this.tank_1_health);
+        // set tank_2_health to panel_2
+        this.tank_2_health = new JLabel();
+        this.tank_2_health.setFont(font);
+        //this.tank_2_health.setForeground(Color.GRAY);
+        this.tank_2_health.setHorizontalAlignment(JLabel.RIGHT);
+        this.tank_2_health.setVerticalAlignment(JLabel.BOTTOM);
+        this.tank_2_health.setOpaque(false);
+        this.tank_2_health.setVisible(true);
+        player_2.add(this.tank_2_health);
+    }
+
+    public void addPlayerTankHealthInfo() {
+        this.tank_1_health.setText((int) (this.tank_1.getHealth() * 100) + "/300");
+        this.tank_2_health.setText((int) (this.tank_2.getHealth() * 100) + "/300");
     }
 
     private void addGameObjects() {
