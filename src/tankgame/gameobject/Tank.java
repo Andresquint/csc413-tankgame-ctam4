@@ -19,6 +19,26 @@ public class Tank extends GameMovableObject {
         this.left = this.up = this.down = this.right = this.fire = false;
     }
 
+    public boolean onCollision(GameObject gameObject) {
+        switch (gameObject.getClass().getSimpleName()) {
+            case "Bullet":
+                return !takeDamage(((Bullet) gameObject).getDamage());
+            case "PowerUp":
+                // TODO
+                return false;
+            case "Tank":
+                return true;
+            case "Wall":
+                if (this.angle >= 0 && this.angle < 45 || this.angle >= 225) {
+                    drive();
+                } else {
+                    reverse();
+                }
+                return false;
+        }
+        return false;
+    }
+
     public double getHealth() {
         return this.health;
     }

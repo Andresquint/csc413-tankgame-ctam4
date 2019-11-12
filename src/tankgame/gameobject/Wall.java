@@ -14,7 +14,11 @@ public class Wall extends GameObject {
 
     public boolean onCollision(GameObject gameObject) {
         switch (gameObject.getClass().getSimpleName()) {
+            case "Bullet":
+                return this.isBreakable;
+            case "PowerUp":
             case "Tank":
+            case "Wall":
                 return false;
         }
         return false;
