@@ -42,6 +42,7 @@ public class Tank extends GameMovableObject {
         }
         if (this.fire) {
             shoot();
+            this.fire = false;
         }
     }
 
