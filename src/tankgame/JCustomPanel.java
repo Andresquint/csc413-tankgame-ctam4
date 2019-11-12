@@ -1,6 +1,6 @@
 package tankgame;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Graphics;
@@ -13,14 +13,14 @@ import tankgame.gameobject.GameMovableObject;
 
 public class JCustomPanel extends JPanel implements ActionListener {
     public Timer timer;
-    public ArrayList<GameObject> gameObjects;
-    public ArrayList<GameMovableObject> gameMovableObjects;
+    public CopyOnWriteArrayList<GameObject> gameObjects;
+    public CopyOnWriteArrayList<GameMovableObject> gameMovableObjects;
 
     public JCustomPanel() {
         super();
         // initialize gameObjects & gameMovableObjects
-        this.gameObjects = new ArrayList<>();
-        this.gameMovableObjects = new ArrayList<>();
+        this.gameObjects = new CopyOnWriteArrayList<>();
+        this.gameMovableObjects = new CopyOnWriteArrayList<>();
         // set & start timer
         this.timer = new Timer(200, this);
         this.timer.start();
@@ -39,8 +39,8 @@ public class JCustomPanel extends JPanel implements ActionListener {
         return (x && y);
     }
 
-    private ArrayList<GameObject> checkCollision(final GameMovableObject gameMovableObject) {
-        ArrayList<GameObject> collidedGameObjects = new ArrayList<>();
+    private CopyOnWriteArrayList<GameObject> checkCollision(final GameMovableObject gameMovableObject) {
+        CopyOnWriteArrayList<GameObject> collidedGameObjects = new CopyOnWriteArrayList<>();
         // check collision on gameObjects
         this.gameObjects.forEach((n) -> {
             if (checkCollision(gameMovableObject, n)) {
