@@ -33,11 +33,8 @@ public class Splash extends JContainer {
         this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         // set frame resizable
         this.frame.setResizable(false);
-        // set frame size by using current screen size
-        DisplayMode device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode();
-        System.out.println(this.getClass().getSimpleName() + " - Splash() - Get screen size: " + device.getWidth() + "x" + device.getHeight());
-        this.frame.setSize(new Dimension((int) (device.getWidth() * this.width), (int) (device.getHeight() * this.height)));
-        this.frame.setMaximumSize(this.frame.getSize());
+        // set frame size
+        this.frame.setSize(new Dimension(1024, 576));
         // create JPanel object
         this.panel = new JPanel();
         // set panel size

@@ -53,11 +53,8 @@ public class Gameworld extends JContainer {
         this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         // set frame resizable
         this.frame.setResizable(false);
-        // set frame size by using current screen size
-        DisplayMode device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode();
-        System.out.println(this.getClass().getSimpleName() + " - Gameworld() - Get screen size: " + device.getWidth() + "x" + device.getHeight());
-        this.frame.setSize(new Dimension((int) (device.getWidth() * this.width), (int) (device.getHeight() * this.height)));
-        this.frame.setMaximumSize(this.frame.getSize());
+        // set frame size
+        this.frame.setSize(new Dimension(1280, 720));
         // create JCustomPanel objects
         this.panel_1 = new JCustomPanel();
         this.panel_2 = new JCustomPanel();
