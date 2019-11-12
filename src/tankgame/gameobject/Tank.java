@@ -9,13 +9,12 @@ public class Tank extends GameMovableObject {
     private final int R = 20;
     private final int ROTATESPEED = 10;
 
-    private double health;
-
+    private int health;
     private boolean left, up, down, right, fire;
 
     public Tank(Launcher app, BufferedImage image, int x, int y, int vx, int vy, int angle, int maxX, int maxY) {
         super(app, image, x, y, vx, vy, angle, maxX, maxY);
-        this.health = 3.0;
+        this.health = 300;
         this.left = this.up = this.down = this.right = this.fire = false;
     }
 
@@ -42,7 +41,7 @@ public class Tank extends GameMovableObject {
         return this.health;
     }
 
-    public void setHealth(double health) {
+    public void setHealth(int health) {
         this.health = health;
     }
 
@@ -95,7 +94,7 @@ public class Tank extends GameMovableObject {
     private void shoot() {
         int x = this.x + this.width / 2 + (int) Math.round(this.width * Math.cos(Math.toRadians(this.angle))) + 1;
         int y = this.y + this.height / 2 + (int) Math.round(this.height * Math.sin(Math.toRadians(this.angle))) + 1;
-        this.app.getGameworld().addPlayerBullet(this, x, y, this.vx, this.vy, this.angle, 0.2);
+        this.app.getGameworld().addPlayerBullet(this, x, y, this.vx, this.vy, this.angle, 20);
     }
 
     public void toggleLeft(boolean value) {
@@ -123,11 +122,10 @@ public class Tank extends GameMovableObject {
         this.fire = value;
     }
 
-    public boolean takeDamage(double damage) {
+    public boolean takeDamage(int damage) {
         System.out.println(this.getClass().getSimpleName() + " - takeDamage()");
         if (this.health - damage > 0) {
             this.health -= damage;
-            System.out.println("new health: "+this.health);
             return true;
         }
         return false;

@@ -133,8 +133,8 @@ public class Gameworld extends JContainer {
     }
 
     public void addPlayerTankHealthInfo() {
-        this.tank_1_health.setText((int) (this.tank_1.getHealth() * 100) + "/300");
-        this.tank_2_health.setText((int) (this.tank_2.getHealth() * 100) + "/300");
+        this.tank_1_health.setText(this.tank_1.getHealth() + "/300");
+        this.tank_2_health.setText(this.tank_2.getHealth() + "/300");
     }
 
     private void addGameObjects() {
@@ -191,7 +191,7 @@ public class Gameworld extends JContainer {
         throw new IllegalArgumentException();
     }
 
-    public void addPlayerBullet(Tank tank, int x, int y, int vx, int vy, int angle, double damage) {
+    public void addPlayerBullet(Tank tank, int x, int y, int vx, int vy, int angle, int damage) {
         if (tank.equals(getPlayerTank(1))) {
             System.out.println(this.getClass().getSimpleName() + " - addPlayerBullet() - Player 1 - x,y,vx,vy,angle: " + x + "," + y + "," + vx + "," + vy + "," + angle);
             this.panel_1.gameMovableObjects.add(new Bullet(this.app, this.app.getResource("Gameworld/bullet"), x, y, vx, vy, angle, this.panel_1.getWidth(), this.panel_1.getHeight(), damage));
@@ -203,7 +203,7 @@ public class Gameworld extends JContainer {
         }
     }
 
-    public void movePlayerBullet(Bullet bullet, int x, int y, int vx, int vy, int angle, double damage) {
+    public void movePlayerBullet(Bullet bullet, int x, int y, int vx, int vy, int angle, int damage) {
         // move from panel_1 to panel_2
         if (this.panel_1.gameMovableObjects.contains(bullet)) {
             System.out.println(this.getClass().getSimpleName() + " - movePlayerBullet() - Player 1 - x,y,vx,vy,angle: " + x + "," + y + "," + vx + "," + vy + "," + angle);

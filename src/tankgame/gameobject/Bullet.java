@@ -8,9 +8,9 @@ import tankgame.Launcher;
 public class Bullet extends GameMovableObject {
     private final int R = 50;
 
-    private double damage;
+    private int damage;
 
-    public Bullet(Launcher app, BufferedImage image, int x, int y, int vx, int vy, int angle, int maxX, int maxY, double damage) {
+    public Bullet(Launcher app, BufferedImage image, int x, int y, int vx, int vy, int angle, int maxX, int maxY, int damage) {
         super(app, image, x, y, vx, vy, angle, maxX, maxY);
         this.damage = damage;
     }
@@ -44,7 +44,7 @@ public class Bullet extends GameMovableObject {
         }
     }
 
-    public double getDamage() {
+    public int getDamage() {
         return this.damage;
     }
 }

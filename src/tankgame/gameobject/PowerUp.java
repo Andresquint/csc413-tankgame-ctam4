@@ -21,7 +21,7 @@ public class PowerUp extends GameObject {
             case "Tank":
                 switch (this.type) {
                     case "health":
-                        ((Tank) gameObject).setHealth(3.0);
+                        ((Tank) gameObject).setHealth(300);
                         break;
                 }
                 return true;
