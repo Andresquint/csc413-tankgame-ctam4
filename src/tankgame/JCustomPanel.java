@@ -22,7 +22,7 @@ public class JCustomPanel extends JPanel implements ActionListener {
         this.gameObjects = new CopyOnWriteArrayList<>();
         this.gameMovableObjects = new CopyOnWriteArrayList<>();
         // set & start timer
-        this.timer = new Timer(200, this);
+        this.timer = new Timer(100, this);
         this.timer.start();
     }
 
@@ -76,10 +76,8 @@ public class JCustomPanel extends JPanel implements ActionListener {
                     switch (gameObject.getClass().getSuperclass().getSimpleName()) {
                         case "GameObject":
                             this.gameObjects.remove(gameObject);
-                            System.out.println("Failed 1");
                             break;
                         case "GameMovableObject":
-                        System.out.println("Failed 2");
                             this.gameMovableObjects.remove(gameObject);
                             break;
                     }

@@ -6,7 +6,7 @@ import java.lang.Math;
 import tankgame.Launcher;
 
 public class Tank extends GameMovableObject {
-    private final int R = 5;
+    private final int R = 20;
     private final int ROTATESPEED = 10;
 
     private double health;
@@ -15,7 +15,7 @@ public class Tank extends GameMovableObject {
 
     public Tank(Launcher app, BufferedImage image, int x, int y, int vx, int vy, int angle, int maxX, int maxY) {
         super(app, image, x, y, vx, vy, angle, maxX, maxY);
-        this.health = 1.0;
+        this.health = 3.0;
         this.left = this.up = this.down = this.right = this.fire = false;
     }
 
@@ -24,7 +24,6 @@ public class Tank extends GameMovableObject {
             case "Bullet":
                 return !takeDamage(((Bullet) gameObject).getDamage());
             case "PowerUp":
-                // TODO
                 return false;
             case "Tank":
                 return true;
