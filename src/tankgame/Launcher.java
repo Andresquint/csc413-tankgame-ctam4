@@ -21,8 +21,9 @@ public class Launcher {
         strings = new HashMap<>();
         // import resources using path
         putResource("icon", "./resources/icon.ico");
-        // TODO import strings
+        // import strings
         putString("name", "Tank Game");
+        // TODO
         // get current screen size
         DisplayMode device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode();
         System.out.println(this.getClass().getSimpleName() + " - Launcher() - Get screen size: " + device.getWidth() + "x" + device.getHeight());

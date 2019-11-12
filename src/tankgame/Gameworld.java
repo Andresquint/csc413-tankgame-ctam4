@@ -1,6 +1,5 @@
 package tankgame;
 
-import java.lang.IllegalArgumentException;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.BorderLayout;
@@ -9,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSplitPane;
 import java.lang.Math;
+import java.lang.IllegalArgumentException;
 
 import tankgame.gameobject.*;
 
