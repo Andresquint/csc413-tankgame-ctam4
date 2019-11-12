@@ -55,6 +55,17 @@ public class JCustomPanel extends JPanel implements ActionListener {
         return collidedGameObjects;
     }
 
+    private void removeGameObject(GameObject gameObject) {
+        switch (gameObject.getClass().getSuperclass().getSimpleName()) {
+            case "GameObject":
+                this.gameObjects.remove(gameObject);
+                break;
+            case "GameMovableObject":
+                this.gameMovableObjects.remove(gameObject);
+                break;
+        }
+    }
+
     public void actionPerformed(ActionEvent e) {
         System.out.println(this.getClass().getSimpleName() + " - actionPerformed()");
         this.gameMovableObjects.forEach((n) -> {
@@ -65,21 +76,11 @@ public class JCustomPanel extends JPanel implements ActionListener {
             for (GameObject m : checkCollision(n)) {
                 //System.out.println("x,y=" + m.getX() + "," + m.getY());
                 //System.out.println("org x,y,x',y'=" + n.getX() + "," + n.getY() + "," + (n.getX() + n.getWidth()) + "," + (n.getY() + n.getHeight()));
-                gameObject = null;
                 if (m.onCollision(n)) {
-                    gameObject = m;
-                } else if (n.onCollision(m)) {
-                    gameObject = n;
+                    removeGameObject(m);
                 }
-                if (gameObject != null) {
-                    switch (gameObject.getClass().getSuperclass().getSimpleName()) {
-                        case "GameObject":
-                            this.gameObjects.remove(gameObject);
-                            break;
-                        case "GameMovableObject":
-                            this.gameMovableObjects.remove(gameObject);
-                            break;
-                    }
+                if (n.onCollision(m)) {
+                    removeGameObject(n);
                 }
             }
         });
