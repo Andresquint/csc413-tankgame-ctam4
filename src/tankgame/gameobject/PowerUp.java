@@ -19,7 +19,11 @@ public class PowerUp extends GameObject {
             case "Wall":
                 return false;
             case "Tank":
-                // TODO
+                switch (this.type) {
+                    case "health":
+                        ((Tank) gameObject).setHealth(3.0);
+                        break;
+                }
                 return true;
         }
         return false;
