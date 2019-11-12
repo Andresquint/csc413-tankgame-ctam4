@@ -30,7 +30,7 @@ public class Gameworld extends JContainer {
         this.app.putResource("Gameworld/background", "../resources/Background.bmp");
         this.app.putResource("Gameworld/wall_1", "../resources/Wall1.gif");
         this.app.putResource("Gameworld/wall_2", "../resources/Wall2.gif");
-        this.app.putResource("Gameworld/weapon", "../resources/Weapon.gif");
+        this.app.putResource("Gameworld/bullet", "../resources/Weapon.gif");
         this.app.putResource("Gameworld/tank_1", "../resources/Tank1.gif");
         this.app.putResource("Gameworld/tank_2", "../resources/Tank2.gif");
         this.app.putResource("Gameworld/shield_1", "../resources/Shield1.gif");
@@ -150,8 +150,9 @@ public class Gameworld extends JContainer {
                 return this.tank_1;
             case 2:
                 return this.tank_2;
-            default:
-                throw new IllegalArgumentException();
+        }
+        throw new IllegalArgumentException();
+    }
         }
     }
 
