@@ -139,24 +139,28 @@ public class Gameworld extends JContainer {
 
     private void addGameObjects() {
         BufferedImage image;
-        int unitX, unitY;
+        int unitX, unitY, maxUnitX, maxUnitY;
         // get unitX & unitY for unbreakable wall
         image = this.app.getResource("Gameworld/wall_1");
         unitX = (int) Math.round(image.getWidth() * this.app.getScale());
         unitY = (int) Math.round(image.getHeight() * this.app.getScale());
         // add unbreakable walls on border to panel_1
-        for (int x = 0; x < this.panel_1.getWidth() / unitX; x++) {
-            for (int y = 1; y < this.panel_1.getHeight() / unitY; y++) {
-                if (x >= 1 && y >= 2 && (y < this.panel_1.getHeight() / unitY - 2) || y > this.panel_1.getHeight() / unitY - 2) {
+        maxUnitX = (int) Math.ceil(this.panel_1.getWidth() / unitX);
+        maxUnitY = (int) Math.ceil(this.panel_1.getHeight() / unitY);
+        for (int x = 0; x < maxUnitX; x++) {
+            for (int y = 0; y < maxUnitY; y++) {
+                if (x >= 1 && y >= 1 && y != maxUnitY - 1) {
                     continue;
                 }
                 this.panel_1.gameObjects.add(new Wall(this.app, image, x * unitX, y * unitY, false));
             }
         }
         // add unbreakable walls on border to panel_2
-        for (int x = 0; x < this.panel_2.getWidth() / unitX; x++) {
-            for (int y = 1; y < this.panel_2.getHeight() / unitY; y++) {
-                if (x < this.panel_2.getWidth() / unitX - 1 && y >= 2 && (y < this.panel_2.getHeight() / unitY - 2) || y > this.panel_2.getHeight() / unitY - 2) {
+        maxUnitX = (int) Math.ceil(this.panel_2.getWidth() / unitX);
+        maxUnitY = (int) Math.ceil(this.panel_2.getHeight() / unitY);
+        for (int x = 0; x < maxUnitX; x++) {
+            for (int y = 0; y < maxUnitY; y++) {
+                if (x < maxUnitX - 1 && y >= 1 && y != maxUnitY - 1) {
                     continue;
                 }
                 this.panel_2.gameObjects.add(new Wall(this.app, image, x * unitX, y * unitY, false));
