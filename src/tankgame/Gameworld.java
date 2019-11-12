@@ -1,23 +1,20 @@
 package tankgame;
 
 import java.lang.IllegalArgumentException;
-import java.awt.DisplayMode;
-import java.awt.GraphicsEnvironment;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSplitPane;
-import javax.swing.ImageIcon;
 import java.lang.Math;
 
 import tankgame.gameobject.*;
 
 public class Gameworld extends JContainer {
     private JCustomPanel panel_1, panel_2;
+    private JLabel tank_1_health, tank_2_health;
 
     private Tank tank_1, tank_2;
 
