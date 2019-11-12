@@ -59,21 +59,29 @@ public class JCustomPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         System.out.println(this.getClass().getSimpleName() + " - actionPerformed()");
         this.gameMovableObjects.forEach((n) -> {
+        GameObject gameObject;
             // update objects on gameMovableObjects
             n.update();
             // check collision on gameMovableObjects
             for (GameObject m : checkCollision(n)) {
-                // TODO
+                //System.out.println("x,y=" + m.getX() + "," + m.getY());
+                //System.out.println("org x,y,x',y'=" + n.getX() + "," + n.getY() + "," + (n.getX() + n.getWidth()) + "," + (n.getY() + n.getHeight()));
+                gameObject = null;
                 if (m.onCollision(n)) {
-                    switch (m.getClass().getSuperclass().getSimpleName()) {
+                    gameObject = m;
+                } else if (n.onCollision(m)) {
+                    gameObject = n;
+                }
+                if (gameObject != null) {
+                    switch (gameObject.getClass().getSuperclass().getSimpleName()) {
                         case "GameObject":
-                            this.gameObjects.remove(m);
+                            this.gameObjects.remove(gameObject);
+                            System.out.println("Failed 1");
                             break;
                         case "GameMovableObject":
-                            this.gameMovableObjects.remove(m);
+                        System.out.println("Failed 2");
+                            this.gameMovableObjects.remove(gameObject);
                             break;
-                        default:
-                            System.out.println("Failed");
                     }
                 }
             }
