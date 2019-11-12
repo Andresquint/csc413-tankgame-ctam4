@@ -73,6 +73,8 @@ public class Gameworld extends JContainer {
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, this.panel_1, this.panel_2);
         // remove splitPane divider
         splitPane.setDividerSize(0);
+        // set splitPane equal width
+        splitPane.setResizeWeight(0.5);
         // set splitPane visible
         splitPane.setVisible(true);
         // add splitPane to frame
