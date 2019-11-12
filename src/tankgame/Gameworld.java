@@ -138,10 +138,10 @@ public class Gameworld extends JContainer {
             }
         }
         // set tank_1 to panel_1
-        this.tank_1 = new Tank(this.app, this.app.getResource("Gameworld/tank_1"), this.panel_1.getWidth() / 2, this.panel_1.getHeight() / 2, 0, 0, 90, this.panel_1.getWidth(), this.panel_1.getHeight());
+        this.tank_1 = new Tank(this.app, this.app.getResource("Gameworld/tank_1"), this.panel_1.getWidth() / 2, this.panel_1.getHeight() / 2, 0, 0, 0, this.panel_1.getWidth(), this.panel_1.getHeight());
         this.panel_1.gameMovableObjects.add(this.tank_1);
         // set tank_2 to panel_2
-        this.tank_2 = new Tank(this.app, this.app.getResource("Gameworld/tank_2"), this.panel_2.getWidth() / 2, this.panel_2.getHeight() / 2, 0, 0, 90, this.panel_2.getWidth(), this.panel_2.getHeight());
+        this.tank_2 = new Tank(this.app, this.app.getResource("Gameworld/tank_2"), this.panel_2.getWidth() / 2, this.panel_2.getHeight() / 2, 0, 0, 180, this.panel_2.getWidth(), this.panel_2.getHeight());
         this.panel_2.gameMovableObjects.add(this.tank_2);
         image = this.app.getResource("Gameworld/powerup");
         for (int i = 0; i < 3; i++) {
