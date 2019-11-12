@@ -93,7 +93,9 @@ public class Tank extends GameMovableObject {
     }
 
     private void shoot() {
-        // TODO
+        int x = this.x + this.width / 2 + (int) Math.round(this.width * Math.cos(Math.toRadians(this.angle))) + 1;
+        int y = this.y + this.height / 2 + (int) Math.round(this.height * Math.sin(Math.toRadians(this.angle))) + 1;
+        this.app.getGameworld().addPlayerBullet(this, x, y, this.vx, this.vy, this.angle, 0.2);
     }
 
     public void toggleLeft(boolean value) {

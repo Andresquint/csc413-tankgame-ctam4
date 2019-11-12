@@ -153,6 +153,35 @@ public class Gameworld extends JContainer {
         }
         throw new IllegalArgumentException();
     }
+
+    public void addPlayerBullet(Tank tank, int x, int y, int vx, int vy, int angle, double damage) {
+        if (tank.equals(getPlayerTank(1))) {
+            System.out.println(this.getClass().getSimpleName() + " - addPlayerBullet() - Player 1 - x,y,vx,vy,angle: " + x + "," + y + "," + vx + "," + vy + "," + angle);
+            this.panel_1.gameMovableObjects.add(new Bullet(this.app, this.app.getResource("Gameworld/bullet"), x, y, vx, vy, angle, this.panel_1.getWidth(), this.panel_1.getHeight(), damage));
+        } else if (tank.equals(getPlayerTank(2))) {
+            System.out.println(this.getClass().getSimpleName() + " - addPlayerBullet() - Player 2 - x,y,vx,vy,angle: " + x + "," + y + "," + vx + "," + vy + "," + angle);
+            this.panel_2.gameMovableObjects.add(new Bullet(this.app, this.app.getResource("Gameworld/bullet"), x, y, vx, vy, angle, this.panel_2.getWidth(), this.panel_2.getHeight(), damage));
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public void movePlayerBullet(Bullet bullet, int x, int y, int vx, int vy, int angle, double damage) {
+        // move from panel_1 to panel_2
+        if (this.panel_1.gameMovableObjects.contains(bullet)) {
+            System.out.println(this.getClass().getSimpleName() + " - movePlayerBullet() - Player 1 - x,y,vx,vy,angle: " + x + "," + y + "," + vx + "," + vy + "," + angle);
+            // remove bullet from panel_1
+            this.panel_1.gameMovableObjects.remove(bullet);
+            this.panel_2.gameMovableObjects.add(new Bullet(this.app, this.app.getResource("Gameworld/bullet"), x - this.panel_2.getWidth(), y, vx, vy, angle, this.panel_2.getWidth(), this.panel_1.getHeight(), damage));
+        }
+        // move from panel_2 to panel_1
+        else if (this.panel_2.gameMovableObjects.contains(bullet)) {
+            System.out.println(this.getClass().getSimpleName() + " - movePlayerBullet() - Player 2 - x,y,vx,vy,angle: " + x + "," + y + "," + vx + "," + vy + "," + angle);
+            // remove bullet from panel_2
+            this.panel_2.gameMovableObjects.remove(bullet);
+            this.panel_1.gameMovableObjects.add(new Bullet(this.app, this.app.getResource("Gameworld/bullet"), x + this.panel_1.getWidth(), y, vx, vy, angle, this.panel_1.getWidth(), this.panel_1.getHeight(), damage));
+        } else {
+            throw new IllegalArgumentException();
         }
     }
 
