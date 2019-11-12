@@ -14,3 +14,4 @@ local.properties
 .recommenders
 *.launch
 *.class
+*.iml
