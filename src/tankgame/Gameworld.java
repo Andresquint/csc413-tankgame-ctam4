@@ -59,7 +59,7 @@ public class Gameworld extends JContainer {
         this.panel_1.setLayout(new BorderLayout());
         this.panel_2.setLayout(new BorderLayout());
         // set panels size
-        Dimension size = new Dimension((int) Math.round(this.frame.getWidth() * 0.5), this.frame.getHeight());
+        Dimension size = new Dimension((int) Math.round(this.frame.getWidth() * 0.5), this.frame.getHeight() - 75);
         this.panel_1.setSize(size);
         this.panel_2.setSize(size);
         // set panels visible
