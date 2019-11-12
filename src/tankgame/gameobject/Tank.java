@@ -19,6 +19,14 @@ public class Tank extends GameMovableObject {
         this.left = this.up = this.down = this.right = this.fire = false;
     }
 
+    public double getHealth() {
+        return this.health;
+    }
+
+    public void setHealth(double health) {
+        this.height = health;
+    }
+
     public void update() {
         if (this.left) {
             turnLeft();
@@ -90,5 +98,15 @@ public class Tank extends GameMovableObject {
     public void toggleFire(boolean value) {
         System.out.println(this.getClass().getSimpleName() + " - toggleFire()");
         this.fire = value;
+    }
+
+    public boolean takeDamage(double damage) {
+        System.out.println(this.getClass().getSimpleName() + " - takeDamage()");
+        if (this.health - damage > 0) {
+            this.health -= damage;
+            System.out.println("new health: "+this.health);
+            return true;
+        }
+        return false;
     }
 }
