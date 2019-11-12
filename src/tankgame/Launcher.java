@@ -20,7 +20,7 @@ public class Launcher {
         resources = new HashMap<>();
         strings = new HashMap<>();
         // import resources using path
-        putResource("icon", "../resources/icon.ico");
+        putResource("icon", "./resources/icon.ico");
         // TODO import strings
         putString("name", "Tank Game");
         // get current screen size
