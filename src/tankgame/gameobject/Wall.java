@@ -6,21 +6,21 @@ import tankgame.Launcher;
 
 public class Wall extends GameObject {
     private boolean isBreakable;
-    private boolean isBroken;
 
     public Wall(Launcher app, BufferedImage image, int x, int y, boolean isBreakable) {
         super(app, image, x, y);
         this.isBreakable = isBreakable;
-        if (this.isBreakable) {
-            this.isBroken = false;
-        }
     }
 
-    public boolean breakIt() {
-        if (this.isBreakable && !this.isBroken) {
-            this.isBroken = true;
-            return true;
+    public boolean onCollision(GameObject gameObject) {
+        switch (gameObject.getClass().getSimpleName()) {
+            case "Tank":
+                return false;
         }
         return false;
+    }
+
+    public boolean getIsBreakable() {
+        return this.isBreakable;
     }
 }
