@@ -44,7 +44,7 @@ public class Tank extends GameMovableObject {
     }
 
     public void setHealth(double health) {
-        this.height = health;
+        this.health = health;
     }
 
     public void update() {
