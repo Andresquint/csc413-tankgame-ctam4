@@ -31,7 +31,22 @@ public class Splash extends JContainer {
         // set frame resizable
         this.frame.setResizable(false);
         // set frame size
-        this.frame.setSize(new Dimension(1024, 576));
+        Dimension size;
+        switch (this.app.getScale()) {
+            case 1:
+                size = new Dimension(1280, 720);
+                break;
+            case 2:
+                size = new Dimension(1920, 1080);
+                break;
+            case 3:
+                size = new Dimension(2560, 1440);
+                break;
+            default:
+                size = new Dimension(1280, 720);
+                break;
+        }
+        this.frame.setSize(size);
         // create JPanel object
         this.panel = new JPanel();
         // set panel size

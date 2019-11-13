@@ -52,7 +52,22 @@ public class Gameworld extends JContainer {
         // set frame resizable
         this.frame.setResizable(false);
         // set frame size
-        this.frame.setSize(new Dimension(1280, 720));
+        Dimension size;
+        switch (this.app.getScale()) {
+            case 1:
+                size = new Dimension(1280, 720);
+                break;
+            case 2:
+                size = new Dimension(1920, 1080);
+                break;
+            case 3:
+                size = new Dimension(2560, 1440);
+                break;
+            default:
+                size = new Dimension(1280, 720);
+                break;
+        }
+        this.frame.setSize(size);
         // create JCustomPanel objects
         this.panel_1 = new JCustomPanel();
         this.panel_2 = new JCustomPanel();
@@ -60,7 +75,7 @@ public class Gameworld extends JContainer {
         this.panel_1.setLayout(new BorderLayout());
         this.panel_2.setLayout(new BorderLayout());
         // set panels size
-        Dimension size = new Dimension((int) Math.round(this.frame.getWidth() * 0.5), this.frame.getHeight() - 75);
+        size = new Dimension((int) Math.round(this.frame.getWidth() * 0.5), this.frame.getHeight() - 75);
         this.panel_1.setSize(size);
         this.panel_2.setSize(size);
         // set panels background color
