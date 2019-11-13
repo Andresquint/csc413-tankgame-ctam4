@@ -38,8 +38,8 @@ public class Bullet extends GameMovableObject {
             this.x += this.vx;
             this.y += this.vy;
         }
-        // if the new position is out of current panel on x
-        else if (this.x + this.vx < 0 || this.x + this.vx > this.maxX) {
+        // if the new position is out of current panel
+        else {
             this.app.getGameworld().movePlayerBullet(this, this.x + this.vx, this.y + this.vy, this.vx, this.vy, this.angle, this.damage);
         }
     }

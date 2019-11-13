@@ -23,7 +23,7 @@ public abstract class GameMovableObject extends GameObject {
     public abstract void update();
 
     protected boolean validPosition(int x, int y) {
-        return (x >= 0 && x < this.maxX - this.width && y >= 0 && y < this.maxY - this.height);
+        return (x >= 0 && x <= this.maxX - this.width && y >= 0 && y <= this.maxY - this.height);
     }
 
     @Override
