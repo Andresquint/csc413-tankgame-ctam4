@@ -35,8 +35,8 @@ public class Gameworld extends JContainer {
         this.app.putResource("Gameworld/powerup", "./resources/Pickup.gif");
         // TODO
         // import strings
-        this.app.putString("Gameworld/player_1", "Player 1");
-        this.app.putString("Gameworld/player_2", "Player 2");
+        this.app.putString("Gameworld/player_1", "PLAYER 1");
+        this.app.putString("Gameworld/player_2", "PLAYER 2");
         this.app.putString("Gameworld/weapon", "Weapon");
         this.app.putString("Gameworld/shield", "Shield");
         // TODO
@@ -86,31 +86,27 @@ public class Gameworld extends JContainer {
     private void playerInfoBar() {
         Font font;
         // font for player_1 & player_2
-        font = new Font(Font.MONOSPACED, Font.BOLD, 50);
+        font = new Font(Font.MONOSPACED, Font.BOLD, 30);
         // set player_1 text to panel_1
         JLabel player_1 = new JLabel();
         player_1.setLayout(new BorderLayout());
-        player_1.setText(this.app.getString("Gameworld/player_1"));
+        player_1.setText("< " + this.app.getString("Gameworld/player_1") + " >");
         player_1.setFont(font);
         player_1.setHorizontalAlignment(JLabel.CENTER);
         player_1.setVerticalAlignment(JLabel.BOTTOM);
         player_1.setOpaque(false);
         player_1.setVisible(true);
         this.panel_1.add(player_1);
-        // set player_1 lives to panel_1
-        // TODO
         // set player_2 text to panel_2
         JLabel player_2 = new JLabel();
         player_2.setLayout(new BorderLayout());
-        player_2.setText(this.app.getString("Gameworld/player_2"));
+        player_2.setText("< " + this.app.getString("Gameworld/player_2") + " >");
         player_2.setFont(font);
         player_2.setHorizontalAlignment(JLabel.CENTER);
         player_2.setVerticalAlignment(JLabel.BOTTOM);
         player_2.setOpaque(false);
         player_2.setVisible(true);
         this.panel_2.add(player_2);
-        // set player_2 lives to panel_2
-        // font for tank_1_health & tank
         font = new Font(Font.MONOSPACED, Font.PLAIN, 30);
         // set tank_1_health to panel_1
         this.tank_1_health = new JLabel();
