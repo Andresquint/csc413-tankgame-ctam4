@@ -164,6 +164,30 @@ public class Gameworld extends JContainer {
                 }
             }
         }
+        // get unitX & unitY for breakable wall
+        image = this.app.getResource("Gameworld/wall_2");
+        unitX = (int) Math.round(image.getWidth() * this.app.getScale());
+        unitY = (int) Math.round(image.getHeight() * this.app.getScale());
+        // add breakable walls on border to panel_1
+        maxUnitX = (int) Math.ceil(this.panel_1.getWidth() / unitX);
+        maxUnitY = (int) Math.ceil(this.panel_1.getHeight() / unitY);
+        for (int x = 0; x < maxUnitX; x++) {
+            for (int y = 0; y < maxUnitY; y++) {
+                if (x == maxUnitX - 1 && !(y == 0 || y == maxUnitY - 1)) {
+                    this.panel_1.gameObjects.add(new Wall(this.app, image, x * unitX, y * unitY, true));
+                }
+            }
+        }
+        // add breakable walls on border to panel_2
+        maxUnitX = (int) Math.ceil(this.panel_2.getWidth() / unitX);
+        maxUnitY = (int) Math.ceil(this.panel_2.getHeight() / unitY);
+        for (int x = 0; x < maxUnitX; x++) {
+            for (int y = 0; y < maxUnitY; y++) {
+                if (x == 0 && !(y == 0 || y == maxUnitY - 1)) {
+                    this.panel_2.gameObjects.add(new Wall(this.app, image, x * unitX, y * unitY, true));
+                }
+            }
+        }
         // set tank_1 to panel_1
         this.tank_1 = new Tank(this.app, this.app.getResource("Gameworld/tank_1"), this.panel_1.getWidth() / 2, this.panel_1.getHeight() / 2, 0, 0, 0, this.panel_1.getWidth(), this.panel_1.getHeight());
         this.panel_1.gameMovableObjects.add(this.tank_1);
