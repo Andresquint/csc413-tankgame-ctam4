@@ -13,7 +13,7 @@ public class Launcher {
     private HashMap<String, BufferedImage> resources;
     private HashMap<String, String> strings;
 
-    private double scale;
+    private int scale;
 
     public Launcher() {
         // initialize resource & strings
@@ -27,7 +27,7 @@ public class Launcher {
         // get current screen size
         DisplayMode device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode();
         System.out.println(this.getClass().getSimpleName() + " - Launcher() - Get screen size: " + device.getWidth() + "x" + device.getHeight());
-        this.scale = device.getWidth() / 1920.0;
+        this.scale = (int) Math.ceil(device.getWidth() / 1280.0);
         System.out.println(this.getClass().getSimpleName() + " - Launcher() - Set scale: " + getScale());
         // initialize JContainer object
         this.splash = new Splash(this);
@@ -63,7 +63,7 @@ public class Launcher {
         this.strings.put(key, value);
     }
 
-    public double getScale() {
+    public int getScale() {
         return this.scale;
     }
 
