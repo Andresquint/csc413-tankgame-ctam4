@@ -149,10 +149,9 @@ public class Gameworld extends JContainer {
         maxUnitY = (int) Math.ceil(this.panel_1.getHeight() / unitY);
         for (int x = 0; x < maxUnitX; x++) {
             for (int y = 0; y < maxUnitY; y++) {
-                if (x >= 1 && y >= 1 && y != maxUnitY - 1) {
-                    continue;
+                if (x == 0 || y == 0 || y == maxUnitY - 1) {
+                    this.panel_1.gameObjects.add(new Wall(this.app, image, x * unitX, y * unitY, false));
                 }
-                this.panel_1.gameObjects.add(new Wall(this.app, image, x * unitX, y * unitY, false));
             }
         }
         // add unbreakable walls on border to panel_2
@@ -160,10 +159,9 @@ public class Gameworld extends JContainer {
         maxUnitY = (int) Math.ceil(this.panel_2.getHeight() / unitY);
         for (int x = 0; x < maxUnitX; x++) {
             for (int y = 0; y < maxUnitY; y++) {
-                if (x < maxUnitX - 1 && y >= 1 && y != maxUnitY - 1) {
-                    continue;
+                if (x == maxUnitX - 1 || y == 0 || y == maxUnitY - 1) {
+                    this.panel_2.gameObjects.add(new Wall(this.app, image, x * unitX, y * unitY, false));
                 }
-                this.panel_2.gameObjects.add(new Wall(this.app, image, x * unitX, y * unitY, false));
             }
         }
         // set tank_1 to panel_1
