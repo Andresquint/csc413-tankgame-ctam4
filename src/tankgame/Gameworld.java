@@ -1,5 +1,6 @@
 package tankgame;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.BorderLayout;
@@ -62,6 +63,9 @@ public class Gameworld extends JContainer {
         Dimension size = new Dimension((int) Math.round(this.frame.getWidth() * 0.5), this.frame.getHeight() - 75);
         this.panel_1.setSize(size);
         this.panel_2.setSize(size);
+        // set panels background color
+        this.panel_1.setBackground(Color.ORANGE);
+        this.panel_2.setBackground(Color.PINK);
         // set panels visible
         this.panel_1.setVisible(true);
         this.panel_2.setVisible(true);
