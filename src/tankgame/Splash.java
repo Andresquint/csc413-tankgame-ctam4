@@ -53,7 +53,7 @@ public class Splash extends JContainer {
         // set instruction to panel
         JLabel instruction = new JLabel();
         instruction.setText(this.app.getString("Splash/instruction"));
-        instruction.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 30));
+        instruction.setFont(new Font(Font.MONOSPACED, Font.PLAIN, (int) Math.round(30 * this.app.getScale())));
         instruction.setPreferredSize(new Dimension((int) (this.panel.getSize().getWidth()), (int) (this.panel.getSize().getHeight() * 0.25)));
         instruction.setHorizontalAlignment(JLabel.CENTER);
         instruction.setVerticalAlignment(JLabel.BOTTOM);

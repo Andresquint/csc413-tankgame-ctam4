@@ -90,7 +90,7 @@ public class Gameworld extends JContainer {
     private void playerInfoBar() {
         Font font;
         // font for player_1 & player_2
-        font = new Font(Font.MONOSPACED, Font.BOLD, 30);
+        font = new Font(Font.MONOSPACED, Font.BOLD, (int) Math.round(30 * this.app.getScale()));
         // set player_1 text to panel_1
         JLabel player_1 = new JLabel();
         player_1.setLayout(new BorderLayout());
@@ -111,7 +111,7 @@ public class Gameworld extends JContainer {
         player_2.setOpaque(false);
         player_2.setVisible(true);
         this.panel_2.add(player_2);
-        font = new Font(Font.MONOSPACED, Font.PLAIN, 30);
+        font = new Font(Font.MONOSPACED, Font.PLAIN, (int) Math.round(30 * this.app.getScale()));
         // set tank_1_health to panel_1
         this.tank_1_health = new JLabel();
         this.tank_1_health.setFont(font);
