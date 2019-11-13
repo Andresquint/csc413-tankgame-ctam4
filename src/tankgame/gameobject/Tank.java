@@ -37,7 +37,7 @@ public class Tank extends GameMovableObject {
         return false;
     }
 
-    public double getHealth() {
+    public int getHealth() {
         return this.health;
     }
 
