@@ -128,6 +128,7 @@ public class Tank extends GameMovableObject {
             this.health -= damage;
             return true;
         }
+        this.health = 0;
         return false;
     }
 }
