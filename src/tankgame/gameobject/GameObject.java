@@ -17,8 +17,8 @@ public abstract class GameObject {
         this.image = image;
         this.x = x;
         this.y = y;
-        this.width = (int) Math.round(this.image.getWidth() * this.app.getScale());
-        this.height = (int) Math.round(this.image.getHeight() * this.app.getScale());
+        this.width = (int) Math.round(this.app.getUnitSize() * this.app.getScale());
+        this.height = (int) Math.round(this.app.getUnitSize() * this.app.getScale());
     }
 
     public int getWidth() {

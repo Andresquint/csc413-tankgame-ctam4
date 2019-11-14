@@ -157,8 +157,8 @@ public class Gameworld extends JContainer {
         int unitX, unitY, maxUnitX, maxUnitY;
         // get unitX & unitY for unbreakable wall
         image = this.app.getResource("Gameworld/wall_1");
-        unitX = (int) Math.round(image.getWidth() * this.app.getScale());
-        unitY = (int) Math.round(image.getHeight() * this.app.getScale());
+        unitX = (int) Math.round(this.app.getUnitSize() * this.app.getScale());
+        unitY = (int) Math.round(this.app.getUnitSize() * this.app.getScale());
         // add unbreakable walls on border to panel_1
         maxUnitX = (int) Math.ceil(this.panel_1.getWidth() / unitX);
         maxUnitY = (int) Math.ceil(this.panel_1.getHeight() / unitY);
@@ -181,8 +181,8 @@ public class Gameworld extends JContainer {
         }
         // get unitX & unitY for breakable wall
         image = this.app.getResource("Gameworld/wall_2");
-        unitX = (int) Math.round(image.getWidth() * this.app.getScale());
-        unitY = (int) Math.round(image.getHeight() * this.app.getScale());
+        unitX = (int) Math.round(this.app.getUnitSize() * this.app.getScale());
+        unitY = (int) Math.round(this.app.getUnitSize() * this.app.getScale());
         // add breakable walls on border to panel_1
         maxUnitX = (int) Math.ceil(this.panel_1.getWidth() / unitX);
         maxUnitY = (int) Math.ceil(this.panel_1.getHeight() / unitY);

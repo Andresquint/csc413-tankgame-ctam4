@@ -13,6 +13,7 @@ public class Launcher {
     private HashMap<String, BufferedImage> resources;
     private HashMap<String, String> strings;
 
+    private final int unitSize = 20;
     private int scale;
 
     public Launcher() {
@@ -61,6 +62,10 @@ public class Launcher {
 
     protected void putString(String key, String value) {
         this.strings.put(key, value);
+    }
+
+    public int getUnitSize() {
+        return this.unitSize;
     }
 
     public int getScale() {

@@ -30,7 +30,7 @@ public abstract class GameMovableObject extends GameObject {
     public void draw(Graphics g) {
         AffineTransform rotation = AffineTransform.getTranslateInstance(this.x, this.y);
         rotation.scale(this.app.getScale(), this.app.getScale());
-        rotation.rotate(Math.toRadians(this.angle), this.image.getWidth() / 2.0, this.image.getHeight() / 2.0);
+        rotation.rotate(Math.toRadians(this.angle), this.app.getUnitSize() / 2.0, this.app.getUnitSize() / 2.0);
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(this.image, rotation, null);
     }
