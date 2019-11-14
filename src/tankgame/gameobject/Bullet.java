@@ -6,7 +6,7 @@ import java.lang.Math;
 import tankgame.Launcher;
 
 public class Bullet extends GameMovableObject {
-    private final int R = 50;
+    private final int R = 15;
 
     private int damage;
 

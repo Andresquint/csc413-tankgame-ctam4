@@ -6,7 +6,7 @@ import java.lang.Math;
 import tankgame.Launcher;
 
 public class Tank extends GameMovableObject {
-    private final int R = 20;
+    private final int R = 5;
     private final int ROTATESPEED = 10;
 
     private int health;
