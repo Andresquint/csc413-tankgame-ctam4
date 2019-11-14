@@ -17,11 +17,12 @@ public class JCustomPanel extends JPanel implements ActionListener {
 
     public JCustomPanel() {
         super();
+        // set timer
+        this.timer = new Timer(100, this);
         // initialize gameObjects & gameMovableObjects
         this.gameObjects = new CopyOnWriteArrayList<>();
         this.gameMovableObjects = new CopyOnWriteArrayList<>();
-        // set & start timer
-        this.timer = new Timer(100, this);
+        // start timer
         this.timer.start();
     }
 
