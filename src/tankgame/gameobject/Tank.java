@@ -67,6 +67,11 @@ public class Tank extends GameMovableObject {
 
     private void turnLeft() {
         this.angle -= this.ROTATESPEED;
+        if (this.angle < 0) {
+            this.angle += 360;
+        } else if (this.angle > 360) {
+            this.angle -= 360;
+        }
     }
 
     private void drive() {
@@ -89,6 +94,11 @@ public class Tank extends GameMovableObject {
 
     private void turnRight() {
         this.angle += this.ROTATESPEED;
+        if (this.angle < 0) {
+            this.angle += 360;
+        } else if (this.angle > 360) {
+            this.angle -= 360;
+        }
     }
 
     private void shoot() {
