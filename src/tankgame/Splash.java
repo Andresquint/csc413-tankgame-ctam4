@@ -31,16 +31,16 @@ public class Splash extends JContainer {
         Dimension size;
         switch (this.app.getScale()) {
             case 1:
-                size = new Dimension(1280, 720);
+                size = new Dimension(1280, 960);
                 break;
             case 2:
-                size = new Dimension(1920, 1080);
+                size = new Dimension(1920, 1440);
                 break;
             case 3:
-                size = new Dimension(2560, 1440);
+                size = new Dimension(2160, 1620);
                 break;
             default:
-                size = new Dimension(1280, 720);
+                size = new Dimension(1280, 960);
                 break;
         }
         this.frame.setSize(size);
