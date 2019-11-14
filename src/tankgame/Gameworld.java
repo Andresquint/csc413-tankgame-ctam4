@@ -25,15 +25,15 @@ public class Gameworld extends JContainer {
         this.width = 0.8;
         this.height = 0.8;
         // import resources using path
-        this.app.putResource("Gameworld/background", "./resources/Background.bmp");
-        this.app.putResource("Gameworld/wall_1", "./resources/Wall1.gif");
-        this.app.putResource("Gameworld/wall_2", "./resources/Wall2.gif");
-        this.app.putResource("Gameworld/bullet", "./resources/Weapon.gif");
-        this.app.putResource("Gameworld/tank_1", "./resources/Tank1.gif");
-        this.app.putResource("Gameworld/tank_2", "./resources/Tank2.gif");
-        this.app.putResource("Gameworld/shield_1", "./resources/Shield1.gif");
-        this.app.putResource("Gameworld/shield_2", "./resources/Shield2.gif");
-        this.app.putResource("Gameworld/powerup", "./resources/Pickup.gif");
+        this.app.putResource("Gameworld/background", "/resources/Background.bmp");
+        this.app.putResource("Gameworld/wall_1", "/resources/Wall1.gif");
+        this.app.putResource("Gameworld/wall_2", "/resources/Wall2.gif");
+        this.app.putResource("Gameworld/bullet", "/resources/Weapon.gif");
+        this.app.putResource("Gameworld/tank_1", "/resources/Tank1.gif");
+        this.app.putResource("Gameworld/tank_2", "/resources/Tank2.gif");
+        this.app.putResource("Gameworld/shield_1", "/resources/Shield1.gif");
+        this.app.putResource("Gameworld/shield_2", "/resources/Shield2.gif");
+        this.app.putResource("Gameworld/powerup", "/resources/Pickup.gif");
         // TODO
         // import strings
         this.app.putString("Gameworld/player_1", "PLAYER 1");

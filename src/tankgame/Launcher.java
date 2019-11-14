@@ -20,7 +20,7 @@ public class Launcher {
         resources = new HashMap<>();
         strings = new HashMap<>();
         // import resources using path
-        putResource("icon", "./resources/icon.ico");
+        putResource("icon", "/resources/icon.ico");
         // import strings
         putString("name", "Tank Game");
         // TODO
@@ -49,7 +49,7 @@ public class Launcher {
 
     protected void putResource(String key, String value) {
         try {
-            this.resources.put(key, ImageIO.read(new File(value)));
+            this.resources.put(key, ImageIO.read(this.getClass().getResourceAsStream(value)));
         } catch (Exception e) {
             System.out.println(this.getClass().getSimpleName() + " - putResource() - " + e);
         }

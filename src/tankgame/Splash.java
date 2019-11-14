@@ -17,7 +17,7 @@ public class Splash extends JContainer {
         this.width = 0.4;
         this.height = 0.4;
         // import resources using path
-        this.app.putResource("Splash/title", "./resources/Title.bmp");
+        this.app.putResource("Splash/title", "/resources/Title.bmp");
         // import strings
         this.app.putString("Splash/instruction", "[ENTER] to start | [ESC] to quit");
         // create JFrame object
