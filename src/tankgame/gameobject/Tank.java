@@ -75,8 +75,8 @@ public class Tank extends GameMovableObject {
     }
 
     private void drive() {
-        this.vx = (int) Math.round(this.R * Math.cos(Math.toRadians(this.angle)));
-        this.vy = (int) Math.round(this.R * Math.sin(Math.toRadians(this.angle)));
+        this.vx = (int) Math.round(this.R * this.app.getScale() *  Math.cos(Math.toRadians(this.angle)));
+        this.vy = (int) Math.round(this.R * this.app.getScale() * Math.sin(Math.toRadians(this.angle)));
         if (validPosition(this.x + this.vx, this.y + this.vy)) {
             this.x += this.vx;
             this.y += this.vy;
@@ -84,8 +84,8 @@ public class Tank extends GameMovableObject {
     }
 
     private void reverse() {
-        this.vx = (int) Math.round(this.R * Math.cos(Math.toRadians(this.angle)));
-        this.vy = (int) Math.round(this.R * Math.sin(Math.toRadians(this.angle)));
+        this.vx = (int) Math.round(this.R * this.app.getScale() * Math.cos(Math.toRadians(this.angle)));
+        this.vy = (int) Math.round(this.R * this.app.getScale() * Math.sin(Math.toRadians(this.angle)));
         if (validPosition(this.x - this.vx, this.y - this.vy)) {
             this.x -= this.vx;
             this.y -= this.vy;

@@ -31,8 +31,8 @@ public class Bullet extends GameMovableObject {
 
     public void update() {
         // go straight
-        this.vx = (int) Math.round(this.R * Math.cos(Math.toRadians(this.angle)));
-        this.vy = (int) Math.round(this.R * Math.sin(Math.toRadians(this.angle)));
+        this.vx = (int) Math.round(this.R * this.app.getScale() * Math.cos(Math.toRadians(this.angle)));
+        this.vy = (int) Math.round(this.R * this.app.getScale() * Math.sin(Math.toRadians(this.angle)));
         // if the new position within current panel
         if (validPosition(this.x + this.vx, this.y + this.vy)) {
             this.x += this.vx;
