@@ -4,17 +4,21 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSplitPane;
+import javax.swing.Timer;
 import java.lang.Math;
 import java.lang.IllegalArgumentException;
 
 import tankgame.gameobject.*;
 
-public class Gameworld extends JContainer {
+public class Gameworld extends JContainer implements ActionListener {
+    private Timer timer;
     private JCustomPanel panel_1, panel_2;
     private JLabel tank_1_health, tank_2_health;
 
@@ -22,6 +26,8 @@ public class Gameworld extends JContainer {
 
     public Gameworld(Launcher app) {
         super(app);
+        // set timer
+        this.timer = new Timer(100, this);
         // import resources using path
         this.app.putResource("Gameworld/background", "/resources/Background.bmp");
         this.app.putResource("Gameworld/wall_1", "/resources/Wall1.gif");
@@ -104,6 +110,8 @@ public class Gameworld extends JContainer {
         this.frame.add(splitPane);
         // bind GameworldKeyListener to frame
         this.frame.addKeyListener(new GameworldKeyListener(this.app));
+        // start timer
+        this.timer.start();
     }
 
     private void showRules() {
@@ -271,6 +279,7 @@ public class Gameworld extends JContainer {
     protected void close() {
         this.panel_1.timer.stop();
         this.panel_2.timer.stop();
+        this.timer.stop();
         super.close();
     }
 }
