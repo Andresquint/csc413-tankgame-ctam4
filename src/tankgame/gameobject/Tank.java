@@ -69,7 +69,7 @@ public class Tank extends GameMovableObject {
         this.angle -= this.ROTATESPEED;
         if (this.angle < 0) {
             this.angle += 360;
-        } else if (this.angle > 360) {
+        } else if (this.angle >= 360) {
             this.angle -= 360;
         }
     }
@@ -96,7 +96,7 @@ public class Tank extends GameMovableObject {
         this.angle += this.ROTATESPEED;
         if (this.angle < 0) {
             this.angle += 360;
-        } else if (this.angle > 360) {
+        } else if (this.angle >= 360) {
             this.angle -= 360;
         }
     }
