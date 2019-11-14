@@ -145,8 +145,8 @@ public class Gameworld extends JContainer {
     }
 
     public void addPlayerTankHealthInfo() {
-        this.tank_1_health.setText("❤×" + this.tank_1.getHealth() / 100);
-        this.tank_2_health.setText(this.tank_2.getHealth() / 100 + "×❤");
+        this.tank_1_health.setText("❤ " + ((this.tank_1.getHealth() % 100.0 == 0) ? (this.tank_1.getHealth() / 100 - 1) : (this.tank_1.getHealth() / 100)));
+        this.tank_2_health.setText(((this.tank_2.getHealth() % 100.0 == 0) ? (this.tank_2.getHealth() / 100 - 1) : (this.tank_2.getHealth() / 100)) + " ❤");
     }
 
     private void addGameObjects() {
