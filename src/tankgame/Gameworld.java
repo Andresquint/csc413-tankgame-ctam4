@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
+import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSplitPane;
@@ -37,6 +38,10 @@ public class Gameworld extends JContainer {
         this.app.putString("Gameworld/player_2", "PLAYER 2");
         this.app.putString("Gameworld/weapon", "Weapon");
         this.app.putString("Gameworld/shield", "Shield");
+        this.app.putString("Gameworld/rule_1", "You must stay in your region. Your bullets can hit your enemy.");
+        this.app.putString("Gameworld/rule_2", "You have 3 lives, and when it hits 0, you lose.");
+        this.app.putString("Gameworld/rule_3", "Player # - Drive/Turn Left/Turn Right/Reverse/Fire: #1 - W/A/D/S/Z | #2 - I/J/L/K/M");
+        this.app.putString("Gameworld/ok", "Okay");
         // TODO
         // create JFrame object
         this.frame = new JFrame();
@@ -65,6 +70,8 @@ public class Gameworld extends JContainer {
                 break;
         }
         this.frame.setSize(size);
+        // show game rules
+        showRules();
         // create JCustomPanel objects
         this.panel_1 = new JCustomPanel();
         this.panel_2 = new JCustomPanel();
@@ -97,6 +104,10 @@ public class Gameworld extends JContainer {
         this.frame.add(splitPane);
         // bind GameworldKeyListener to frame
         this.frame.addKeyListener(new GameworldKeyListener(this.app));
+    }
+
+    private void showRules() {
+        JOptionPane.showMessageDialog(this.frame, "<html><body>" + this.app.getString("Gameworld/rule_1") + "<br>" + this.app.getString("Gameworld/rule_2") + "<br>" + this.app.getString("Gameworld/rule_3") + "</body></html>", this.app.getString("Gameworld/rule"), JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void addGameObjects() {
