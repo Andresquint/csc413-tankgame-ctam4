@@ -21,9 +21,6 @@ public class Gameworld extends JContainer {
 
     public Gameworld(Launcher app) {
         super(app);
-        // set width & height
-        this.width = 0.8;
-        this.height = 0.8;
         // import resources using path
         this.app.putResource("Gameworld/background", "/resources/Background.bmp");
         this.app.putResource("Gameworld/wall_1", "/resources/Wall1.gif");

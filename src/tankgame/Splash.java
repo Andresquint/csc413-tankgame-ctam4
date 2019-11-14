@@ -13,9 +13,6 @@ public class Splash extends JContainer {
 
     public Splash(Launcher app) {
         super(app);
-        // set width & height
-        this.width = 0.4;
-        this.height = 0.4;
         // import resources using path
         this.app.putResource("Splash/title", "/resources/Title.bmp");
         // import strings

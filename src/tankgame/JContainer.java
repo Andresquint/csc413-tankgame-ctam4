@@ -3,8 +3,6 @@ package tankgame;
 import javax.swing.JFrame;
 
 public abstract class JContainer {
-    protected double width, height;
-
     protected Launcher app;
     protected JFrame frame;
 
