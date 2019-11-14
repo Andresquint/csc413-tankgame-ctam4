@@ -48,6 +48,8 @@ public class Gameworld extends JContainer implements ActionListener {
         this.app.putString("Gameworld/rule_2", "You have 3 lives, and when it hits 0, you lose.");
         this.app.putString("Gameworld/rule_3", "Player # - Drive/Turn Left/Turn Right/Reverse/Fire: #1 - W/A/D/S/Z | #2 - I/J/L/K/M");
         this.app.putString("Gameworld/ok", "Okay");
+        this.app.putString("Gameworld/congrats", "Congrats");
+        this.app.putString("Gameworld/is_winner", "is the winner");
         // TODO
         // create JFrame object
         this.frame = new JFrame();
@@ -275,10 +277,32 @@ public class Gameworld extends JContainer implements ActionListener {
         }
     }
 
+    private void checkWinner() {
+        int player = 0;
+        if (this.tank_2.getHealth() == 0) {
+            player = 1;
+        } else if (this.tank_1.getHealth() == 0) {
+            player = 2;
+        }
+        if (player != 0) {
+            switch (player) {
+                case 1:
+                    JOptionPane.showMessageDialog(this.frame, "<html><body>" + this.app.getString("Gameworld/player_1") + " " + this.app.getString("Gameworld/is_winner") + "!!!</body></html>", this.app.getString("Gameworld/congrats"), JOptionPane.INFORMATION_MESSAGE);
+                    break;
+                case 2:
+                    JOptionPane.showMessageDialog(this.frame, "<html><body>" + this.app.getString("Gameworld/player_2") + " " + this.app.getString("Gameworld/is_winner") + "!!!</body></html>", this.app.getString("Gameworld/congrats"), JOptionPane.INFORMATION_MESSAGE);
+                    break;
+            }
+            this.app.reset();
+        }
+    }
+
     public void actionPerformed(ActionEvent e) {
         System.out.println(this.getClass().getSimpleName() + " - actionPerformed()");
         // add player tank health info
         addPlayerTankHealthInfo();
+        // check winner
+        checkWinner();
     }
 
     @Override
