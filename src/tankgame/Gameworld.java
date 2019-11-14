@@ -275,6 +275,12 @@ public class Gameworld extends JContainer implements ActionListener {
         }
     }
 
+    public void actionPerformed(ActionEvent e) {
+        System.out.println(this.getClass().getSimpleName() + " - actionPerformed()");
+        // add player tank health info
+        addPlayerTankHealthInfo();
+    }
+
     @Override
     protected void close() {
         this.panel_1.timer.stop();
