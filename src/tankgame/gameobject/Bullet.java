@@ -24,7 +24,7 @@ public class Bullet extends GameMovableObject {
             case "Tank":
                 return ((Tank) gameObject).takeDamage(getDamage());
             case "Wall":
-                return !((Wall) gameObject).getIsBreakable();
+                return true;
         }
         return false;
     }
