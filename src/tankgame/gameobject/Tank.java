@@ -31,9 +31,12 @@ public class Tank extends GameMovableObject {
             case "Tank":
                 return true;
             case "Wall":
-                if (this.angle >= 46 && this.angle <= 225) {
+                this.left = this.up = this.down = this.right = this.fire = false;
+                int vx = (int) Math.round(this.R * this.app.getScale() * Math.cos(Math.toRadians(this.angle)));
+                int vy = (int) Math.round(this.R * this.app.getScale() * Math.sin(Math.toRadians(this.angle)));
+                if (vx > 0 || vy > 0) {
                     reverse();
-                } else {
+                } else if (vx < 0 || vy < 0){
                     drive();
                 }
                 return false;
