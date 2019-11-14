@@ -27,10 +27,10 @@ public class Tank extends GameMovableObject {
             case "Tank":
                 return true;
             case "Wall":
-                if (this.angle >= 0 && this.angle < 45 || this.angle >= 225) {
-                    drive();
-                } else {
+                if (this.angle >= 46 && this.angle <= 225) {
                     reverse();
+                } else {
+                    drive();
                 }
                 return false;
         }
