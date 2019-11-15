@@ -82,7 +82,7 @@ public class Gameworld extends JContainer implements ActionListener {
         this.panel_1.setLayout(new BorderLayout());
         this.panel_2.setLayout(new BorderLayout());
         // set panels size
-        size = new Dimension((int) Math.round(this.frame.getWidth() * 0.5), this.frame.getHeight() - 75);
+        size = new Dimension((int) Math.round(this.frame.getContentPane().getWidth() * 0.5), this.frame.getContentPane().getHeight());
         this.panel_1.setSize(size);
         this.panel_2.setSize(size);
         // set panels background color
@@ -131,7 +131,7 @@ public class Gameworld extends JContainer implements ActionListener {
         this.mini_panel_1.setLayout(new BorderLayout());
         this.mini_panel_2.setLayout(new BorderLayout());
         // set panels size
-        size = new Dimension((int) Math.round(this.mini_frame.getWidth() * 0.5), this.mini_frame.getHeight());
+        size = new Dimension((int) Math.round(this.mini_frame.getContentPane().getWidth() * 0.5), this.mini_frame.getContentPane().getHeight());
         this.mini_panel_1.setSize(size);
         this.mini_panel_2.setSize(size);
         // set panels background color
