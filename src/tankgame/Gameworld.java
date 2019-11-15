@@ -123,13 +123,13 @@ public class Gameworld extends JContainer implements ActionListener {
         // set frame size
         switch (this.app.getScale()) {
             case 2:
-                size = new Dimension(480, 360);
+                size = new Dimension(960, 72);
                 break;
             case 3:
-                size = new Dimension(540, 405);
+                size = new Dimension(1080, 810);
                 break;
             default:
-                size = new Dimension(320, 240);
+                size = new Dimension(640, 480);
                 break;
         }
         this.mini_frame.setSize(size);
@@ -150,8 +150,8 @@ public class Gameworld extends JContainer implements ActionListener {
         this.mini_panel_1.setVisible(true);
         this.mini_panel_2.setVisible(true);
         // set GameObjects
-        addWalls(this.mini_panel_1, this.mini_panel_2, 0.25);
-        addTanks(this.mini_panel_1, this.mini_panel_2, this.mini_tank_1, this.mini_tank_2, 0.25);
+        addWalls(this.mini_panel_1, this.mini_panel_2, 0.5);
+        addTanks(this.mini_panel_1, this.mini_panel_2, this.mini_tank_1, this.mini_tank_2, 0.5);
         // create JSplitPane object
         splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, this.mini_panel_1, this.mini_panel_2);
         // remove splitPane divider
@@ -340,7 +340,7 @@ public class Gameworld extends JContainer implements ActionListener {
 
     public void addPlayerBullet(Tank tank, int x, int y, int vx, int vy, int angle, int damage) {
         addPlayerBullet(this.panel_1, this.panel_2, tank, 1.0, x, y, vx, vy, angle, damage);
-        addPlayerBullet(this.mini_panel_1, this.mini_panel_2, tank, 0.25, x, y, vx, vy, angle, damage);
+        addPlayerBullet(this.mini_panel_1, this.mini_panel_2, tank, 0.5, x, y, vx, vy, angle, damage);
     }
 
     private void movePlayerBullet(JCustomPanel panel_1, JCustomPanel panel_2, Bullet bullet, double scale, int x, int y, int vx, int vy, int angle, int damage) {
@@ -364,7 +364,7 @@ public class Gameworld extends JContainer implements ActionListener {
 
     public void movePlayerBullet(Bullet bullet, int x, int y, int vx, int vy, int angle, int damage) {
         movePlayerBullet(this.panel_1, this.panel_2, bullet, 1.0, x, y, vx, vy, angle, damage);
-        movePlayerBullet(this.mini_panel_1, this.mini_panel_2, bullet, 0.25, x, y, vx, vy, angle, damage);
+        movePlayerBullet(this.mini_panel_1, this.mini_panel_2, bullet, 0.5, x, y, vx, vy, angle, damage);
     }
 
     private void checkWinner() {
