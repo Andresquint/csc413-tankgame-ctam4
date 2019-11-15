@@ -368,8 +368,13 @@ public class Gameworld extends JContainer implements ActionListener {
     }
 
     public void movePlayerBullet(Bullet bullet, int x, int y, int vx, int vy, int angle, int damage) {
-        movePlayerBullet(this.panel_1, this.panel_2, bullet, 1.0, x, y, vx, vy, angle, damage);
-        movePlayerBullet(this.mini_panel_1, this.mini_panel_2, bullet, 0.5, x, y, vx, vy, angle, damage);
+        if (this.panel_1.getGameMovableObjects().contains(bullet) || this.panel_2.getGameMovableObjects().contains(bullet)) {
+            movePlayerBullet(this.panel_1, this.panel_2, bullet, 1.0, x, y, vx, vy, angle, damage);
+        } else if (this.mini_panel_1.getGameMovableObjects().contains(bullet) || this.mini_panel_2.getGameMovableObjects().contains(bullet)) {
+            movePlayerBullet(this.mini_panel_1, this.mini_panel_2, bullet, 0.5, x, y, vx, vy, angle, damage);
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     private void checkWinner() {
