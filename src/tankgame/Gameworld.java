@@ -339,8 +339,13 @@ public class Gameworld extends JContainer implements ActionListener {
     }
 
     public void addPlayerBullet(Tank tank, int x, int y, int vx, int vy, int angle, int damage) {
-        addPlayerBullet(this.panel_1, this.panel_2, tank, 1.0, x, y, vx, vy, angle, damage);
-        addPlayerBullet(this.mini_panel_1, this.mini_panel_2, tank, 0.5, x, y, vx, vy, angle, damage);
+        if (tank.equals(this.tank_1) || tank.equals(this.tank_2)) {
+            addPlayerBullet(this.panel_1, this.panel_2, tank, 1.0, x, y, vx, vy, angle, damage);
+        } else if (tank.equals(this.mini_tank_1) || tank.equals(this.mini_tank_2)) {
+            addPlayerBullet(this.mini_panel_1, this.mini_panel_2, tank, 0.5, x, y, vx, vy, angle, damage);
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     private void movePlayerBullet(JCustomPanel panel_1, JCustomPanel panel_2, Bullet bullet, double scale, int x, int y, int vx, int vy, int angle, int damage) {
