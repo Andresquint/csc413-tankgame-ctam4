@@ -32,8 +32,8 @@ public class Tank extends GameMovableObject {
                 return true;
             case "Wall":
                 this.left = this.up = this.down = this.right = this.fire = false;
-                int vx = (int) Math.round(this.R * this.app.getScale() * Math.cos(Math.toRadians(this.angle)));
-                int vy = (int) Math.round(this.R * this.app.getScale() * Math.sin(Math.toRadians(this.angle)));
+                int vx = (int) Math.round(this.R * this.app.getScale() * this.scale * Math.cos(Math.toRadians(this.angle)));
+                int vy = (int) Math.round(this.R * this.app.getScale() * this.scale * Math.sin(Math.toRadians(this.angle)));
                 if (vx > 0 || vy > 0) {
                     reverse();
                 } else if (vx < 0 || vy < 0){
@@ -81,8 +81,8 @@ public class Tank extends GameMovableObject {
     }
 
     private void drive() {
-        this.vx = (int) Math.round(this.R * this.app.getScale() * Math.cos(Math.toRadians(this.angle)));
-        this.vy = (int) Math.round(this.R * this.app.getScale() * Math.sin(Math.toRadians(this.angle)));
+        this.vx = (int) Math.round(this.R * this.app.getScale() * this.scale * Math.cos(Math.toRadians(this.angle)));
+        this.vy = (int) Math.round(this.R * this.app.getScale() * this.scale * Math.sin(Math.toRadians(this.angle)));
         if (validPosition(this.x + this.vx, this.y + this.vy)) {
             this.x += this.vx;
             this.y += this.vy;
@@ -90,8 +90,8 @@ public class Tank extends GameMovableObject {
     }
 
     private void reverse() {
-        this.vx = (int) Math.round(this.R * this.app.getScale() * Math.cos(Math.toRadians(this.angle)));
-        this.vy = (int) Math.round(this.R * this.app.getScale() * Math.sin(Math.toRadians(this.angle)));
+        this.vx = (int) Math.round(this.R * this.app.getScale() * this.scale * Math.cos(Math.toRadians(this.angle)));
+        this.vy = (int) Math.round(this.R * this.app.getScale() * this.scale * Math.sin(Math.toRadians(this.angle)));
         if (validPosition(this.x - this.vx, this.y - this.vy)) {
             this.x -= this.vx;
             this.y -= this.vy;
