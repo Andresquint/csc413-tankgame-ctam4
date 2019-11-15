@@ -33,7 +33,7 @@ public class Gameworld extends JContainer implements ActionListener {
         // import resources using path
         this.app.putResource("Gameworld/wall_1", "/resources/Wall1.gif");
         this.app.putResource("Gameworld/wall_2", "/resources/Wall2.gif");
-        this.app.putResource("Gameworld/bullet", "/resources/Weapon.gif");
+        this.app.putResource("Gameworld/bullet", "/resources/Shell.gif");
         this.app.putResource("Gameworld/tank_1", "/resources/Tank1.gif");
         this.app.putResource("Gameworld/tank_2", "/resources/Tank2.gif");
         this.app.putResource("Gameworld/powerup", "/resources/Pickup.gif");
