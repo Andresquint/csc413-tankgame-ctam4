@@ -29,29 +29,22 @@ public class Gameworld extends JContainer implements ActionListener {
         // set timer
         this.timer = new Timer(100, this);
         // import resources using path
-        this.app.putResource("Gameworld/background", "/resources/Background.bmp");
         this.app.putResource("Gameworld/wall_1", "/resources/Wall1.gif");
         this.app.putResource("Gameworld/wall_2", "/resources/Wall2.gif");
         this.app.putResource("Gameworld/bullet", "/resources/Weapon.gif");
         this.app.putResource("Gameworld/tank_1", "/resources/Tank1.gif");
         this.app.putResource("Gameworld/tank_2", "/resources/Tank2.gif");
-        this.app.putResource("Gameworld/shield_1", "/resources/Shield1.gif");
-        this.app.putResource("Gameworld/shield_2", "/resources/Shield2.gif");
         this.app.putResource("Gameworld/powerup", "/resources/Pickup.gif");
-        // TODO
         // import strings
         this.app.putString("Gameworld/rules", "Rules");
         this.app.putString("Gameworld/player_1", "PLAYER 1");
         this.app.putString("Gameworld/player_2", "PLAYER 2");
-        this.app.putString("Gameworld/weapon", "Weapon");
-        this.app.putString("Gameworld/shield", "Shield");
         this.app.putString("Gameworld/rule_1", "You must stay in your region. Your bullets can hit your enemy.");
         this.app.putString("Gameworld/rule_2", "You have 3 lives, and when it hits 0, you lose.");
         this.app.putString("Gameworld/rule_3", "Player # - Drive/Turn Left/Turn Right/Reverse/Fire: #1 - W/A/D/S/Z | #2 - I/J/L/K/M");
         this.app.putString("Gameworld/ok", "Okay");
         this.app.putString("Gameworld/congrats", "Congrats");
         this.app.putString("Gameworld/is_winner", "is the winner");
-        // TODO
         // create JFrame object
         this.frame = new JFrame();
         // set frame title
