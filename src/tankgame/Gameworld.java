@@ -40,6 +40,7 @@ public class Gameworld extends JContainer implements ActionListener {
         this.app.putResource("Gameworld/powerup", "/resources/Pickup.gif");
         // TODO
         // import strings
+        this.app.putString("Gameworld/rules", "Rules");
         this.app.putString("Gameworld/player_1", "PLAYER 1");
         this.app.putString("Gameworld/player_2", "PLAYER 2");
         this.app.putString("Gameworld/weapon", "Weapon");
@@ -117,7 +118,7 @@ public class Gameworld extends JContainer implements ActionListener {
     }
 
     private void showRules() {
-        JOptionPane.showMessageDialog(this.frame, "<html><body>" + this.app.getString("Gameworld/rule_1") + "<br>" + this.app.getString("Gameworld/rule_2") + "<br>" + this.app.getString("Gameworld/rule_3") + "</body></html>", this.app.getString("Gameworld/rule"), JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this.frame, "<html><body>" + this.app.getString("Gameworld/rule_1") + "<br>" + this.app.getString("Gameworld/rule_2") + "<br>" + this.app.getString("Gameworld/rule_3") + "</body></html>", this.app.getString("Gameworld/rules"), JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void addGameObjects() {
