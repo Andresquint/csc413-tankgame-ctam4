@@ -122,18 +122,7 @@ public class Gameworld extends JContainer implements ActionListener {
         // set frame resizable
         this.mini_frame.setResizable(false);
         // set frame size
-        switch (this.app.getScale()) {
-            case 2:
-                size = new Dimension(960, 72);
-                break;
-            case 3:
-                size = new Dimension(1080, 810);
-                break;
-            default:
-                size = new Dimension(640, 480);
-                break;
-        }
-        this.mini_frame.setSize(size);
+        this.mini_frame.setSize(new Dimension((int) Math.round(this.frame.getWidth() * 0.5), (int) Math.round(this.frame.getHeight() * 0.5)));
         System.out.println(this.getClass().getSimpleName() + " - Gameworld() - Set mini frame size: " + this.mini_frame.getWidth() + "x" + this.mini_frame.getHeight());
         // create JCustomPanel objects for mini
         this.mini_panel_1 = new JCustomPanel();
@@ -142,7 +131,7 @@ public class Gameworld extends JContainer implements ActionListener {
         this.mini_panel_1.setLayout(new BorderLayout());
         this.mini_panel_2.setLayout(new BorderLayout());
         // set panels size
-        size = new Dimension((int) Math.round(this.mini_frame.getWidth() * 0.5), this.mini_frame.getHeight()); //TODO
+        size = new Dimension((int) Math.round(this.mini_frame.getWidth() * 0.5), this.mini_frame.getHeight());
         this.mini_panel_1.setSize(size);
         this.mini_panel_2.setSize(size);
         // set panels background color
