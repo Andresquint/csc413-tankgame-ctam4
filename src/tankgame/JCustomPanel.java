@@ -12,8 +12,8 @@ import tankgame.gameobject.GameMovableObject;
 
 public class JCustomPanel extends JPanel implements ActionListener {
     public Timer timer;
-    public CopyOnWriteArrayList<GameObject> gameObjects;
-    public CopyOnWriteArrayList<GameMovableObject> gameMovableObjects;
+    private CopyOnWriteArrayList<GameObject> gameObjects;
+    private CopyOnWriteArrayList<GameMovableObject> gameMovableObjects;
 
     public JCustomPanel() {
         super();
@@ -24,6 +24,30 @@ public class JCustomPanel extends JPanel implements ActionListener {
         this.gameMovableObjects = new CopyOnWriteArrayList<>();
         // start timer
         this.timer.start();
+    }
+
+    public CopyOnWriteArrayList getGameObjects() {
+        return this.gameObjects;
+    }
+
+    public void putGameObject(GameObject gameObject) {
+        this.gameObjects.add(gameObject);
+    }
+
+    public void removeGameObject(GameObject gameObject) {
+        this.gameObjects.remove(gameObject);
+    }
+
+    public CopyOnWriteArrayList getGameMovableObjects() {
+        return this.gameMovableObjects;
+    }
+
+    public void putGameMovableObject(GameMovableObject gameMovableObject) {
+        this.gameMovableObjects.add(gameMovableObject);
+    }
+
+    public void removeGameMovableObject(GameMovableObject gameMovableObject) {
+        this.gameMovableObjects.remove(gameMovableObject);
     }
 
     private boolean checkCollision(final GameObject gameObject_1, final GameObject gameObject_2) {
@@ -56,7 +80,7 @@ public class JCustomPanel extends JPanel implements ActionListener {
         return collidedGameObjects;
     }
 
-    private void removeGameObject(GameObject gameObject) {
+    private void removeGameObjectGameMovableObject(GameObject gameObject) {
         switch (gameObject.getClass().getSuperclass().getSimpleName()) {
             case "GameObject":
                 this.gameObjects.remove(gameObject);
@@ -78,10 +102,10 @@ public class JCustomPanel extends JPanel implements ActionListener {
                 //System.out.println("x,y=" + m.getX() + "," + m.getY());
                 //System.out.println("org x,y,x',y'=" + n.getX() + "," + n.getY() + "," + (n.getX() + n.getWidth()) + "," + (n.getY() + n.getHeight()));
                 if (m.onCollision(n)) {
-                    removeGameObject(m);
+                    removeGameObjectGameMovableObject(m);
                 }
                 if (n.onCollision(m)) {
-                    removeGameObject(n);
+                    removeGameObjectGameMovableObject(n);
                 }
             }
         });
