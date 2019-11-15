@@ -14,15 +14,17 @@ import javax.swing.JSplitPane;
 import javax.swing.Timer;
 import java.lang.Math;
 import java.lang.IllegalArgumentException;
+import java.lang.reflect.InvocationTargetException;
 
 import tankgame.gameobject.*;
 
 public class Gameworld extends JContainer implements ActionListener {
+    private JFrame mini_frame;
     private Timer timer;
-    private JCustomPanel panel_1, panel_2;
+    private JCustomPanel panel_1, panel_2, mini_panel_1, mini_panel_2;
     private JLabel tank_1_health, tank_2_health;
 
-    private Tank tank_1, tank_2;
+    private Tank tank_1, tank_2, mini_tank_1, mini_tank_2;
 
     public Gameworld(Launcher app) {
         super(app);
@@ -36,6 +38,7 @@ public class Gameworld extends JContainer implements ActionListener {
         this.app.putResource("Gameworld/tank_2", "/resources/Tank2.gif");
         this.app.putResource("Gameworld/powerup", "/resources/Pickup.gif");
         // import strings
+        this.app.putString("Gameworld/minimap", "Minimap");
         this.app.putString("Gameworld/rules", "Rules");
         this.app.putString("Gameworld/player_1", "PLAYER 1");
         this.app.putString("Gameworld/player_2", "PLAYER 2");
@@ -91,9 +94,9 @@ public class Gameworld extends JContainer implements ActionListener {
         this.panel_1.setVisible(true);
         this.panel_2.setVisible(true);
         // set GameObjects
-        addWalls(1.0);
-        addPowerUps(1.0);
-        addTanks(1.0);
+        addWalls(this.panel_1, this.panel_2, 1.0);
+        addPowerUps(this.panel_1, this.panel_2, 1.0);
+        addTanks(this.panel_1, this.panel_2, this.tank_1, this.tank_2, 1.0);
         // set player info bar
         playerInfoBar();
         // create JSplitPane object
@@ -110,13 +113,70 @@ public class Gameworld extends JContainer implements ActionListener {
         this.frame.addKeyListener(new GameworldKeyListener(this.app));
         // start timer
         this.timer.start();
+        // create JFrame object for mini
+        this.mini_frame = new JFrame();
+        // set frame title
+        this.mini_frame.setTitle(this.app.getString("Gameworld/minimap"));
+        // set frame icon
+        this.mini_frame.setIconImage(this.app.getResource("icon"));
+        // set frame close rules
+        this.mini_frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        // set frame resizable
+        this.mini_frame.setResizable(false);
+        // set frame size
+        switch (this.app.getScale()) {
+            case 1:
+                size = new Dimension(320, 240);
+                break;
+            case 2:
+                size = new Dimension(480, 360);
+                break;
+            case 3:
+                size = new Dimension(540, 405);
+                break;
+            default:
+                size = new Dimension(320, 240);
+                break;
+        }
+        this.mini_frame.setSize(size);
+        // create JCustomPanel objects for mini
+        this.mini_panel_1 = new JCustomPanel();
+        this.mini_panel_2 = new JCustomPanel();
+        // set panels layout
+        this.mini_panel_1.setLayout(new BorderLayout());
+        this.mini_panel_2.setLayout(new BorderLayout());
+        // set panels size
+        size = new Dimension((int) Math.round(this.mini_frame.getWidth() * 0.5), this.mini_frame.getHeight()); //TODO
+        this.mini_panel_1.setSize(size);
+        this.mini_panel_2.setSize(size);
+        // set panels background color
+        this.mini_panel_1.setBackground(Color.ORANGE);
+        this.mini_panel_2.setBackground(Color.PINK);
+        // set panels visible
+        this.mini_panel_1.setVisible(true);
+        this.mini_panel_2.setVisible(true);
+        // set GameObjects
+        addWalls(this.mini_panel_1, this.mini_panel_2, 0.25);
+        addTanks(this.mini_panel_1, this.mini_panel_2, this.mini_tank_1, this.mini_tank_2, 0.25);
+        // create JSplitPane object
+        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, this.mini_panel_1, this.mini_panel_2);
+        // remove splitPane divider
+        splitPane.setDividerSize(0);
+        // set splitPane equal width
+        splitPane.setResizeWeight(0.5);
+        // set splitPane visible
+        splitPane.setVisible(true);
+        // add splitPane to frame
+        this.mini_frame.add(splitPane);
+        this.mini_frame.setVisible(true);
+        this.mini_frame.setState(JFrame.NORMAL);
     }
 
     private void showRules() {
         JOptionPane.showMessageDialog(this.frame, "<html><body>" + this.app.getString("Gameworld/rule_1") + "<br>" + this.app.getString("Gameworld/rule_2") + "<br>" + this.app.getString("Gameworld/rule_3") + "</body></html>", this.app.getString("Gameworld/rules"), JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private void addWalls(double scale) {
+    private void addWalls(JCustomPanel panel_1, JCustomPanel panel_2, double scale) {
         BufferedImage image;
         int unitX, unitY, maxUnitX, maxUnitY;
         // get unitX & unitY for unbreakable wall
@@ -124,22 +184,22 @@ public class Gameworld extends JContainer implements ActionListener {
         unitX = (int) Math.round(this.app.getUnitSize() * this.app.getScale() * scale);
         unitY = (int) Math.round(this.app.getUnitSize() * this.app.getScale() * scale);
         // add unbreakable walls on border to panel_1
-        maxUnitX = (int) Math.ceil(this.panel_1.getWidth() / unitX);
-        maxUnitY = (int) Math.ceil(this.panel_1.getHeight() / unitY);
+        maxUnitX = (int) Math.ceil(panel_1.getWidth() / unitX);
+        maxUnitY = (int) Math.ceil(panel_1.getHeight() / unitY);
         for (int x = 0; x < maxUnitX; x++) {
             for (int y = 0; y < maxUnitY; y++) {
                 if (x == 0 || y == 0 || y == maxUnitY - 1) {
-                    this.panel_1.putGameObject(new Wall(this.app, scale, image, x * unitX, y * unitY, false));
+                    panel_1.putGameObject(new Wall(this.app, scale, image, x * unitX, y * unitY, false));
                 }
             }
         }
         // add unbreakable walls on border to panel_2
-        maxUnitX = (int) Math.ceil(this.panel_2.getWidth() / unitX);
-        maxUnitY = (int) Math.ceil(this.panel_2.getHeight() / unitY);
+        maxUnitX = (int) Math.ceil(panel_2.getWidth() / unitX);
+        maxUnitY = (int) Math.ceil(panel_2.getHeight() / unitY);
         for (int x = 0; x < maxUnitX; x++) {
             for (int y = 0; y < maxUnitY; y++) {
                 if (x == maxUnitX - 1 || y == 0 || y == maxUnitY - 1) {
-                    this.panel_2.putGameObject(new Wall(this.app, scale, image, x * unitX, y * unitY, false));
+                    panel_2.putGameObject(new Wall(this.app, scale, image, x * unitX, y * unitY, false));
                 }
             }
         }
@@ -148,44 +208,57 @@ public class Gameworld extends JContainer implements ActionListener {
         unitX = (int) Math.round(this.app.getUnitSize() * this.app.getScale() * scale);
         unitY = (int) Math.round(this.app.getUnitSize() * this.app.getScale() * scale);
         // add breakable walls on border to panel_1
-        maxUnitX = (int) Math.ceil(this.panel_1.getWidth() / unitX);
-        maxUnitY = (int) Math.ceil(this.panel_1.getHeight() / unitY);
+        maxUnitX = (int) Math.ceil(panel_1.getWidth() / unitX);
+        maxUnitY = (int) Math.ceil(panel_1.getHeight() / unitY);
         for (int x = 0; x < maxUnitX; x++) {
             for (int y = 0; y < maxUnitY; y++) {
                 if (x == maxUnitX - 1 && !(y == 0 || y == maxUnitY - 1)) {
-                    this.panel_1.putGameObject(new Wall(this.app, scale, image, x * unitX, y * unitY, true));
+                    panel_1.putGameObject(new Wall(this.app, scale, image, x * unitX, y * unitY, true));
                 }
             }
         }
         // add breakable walls on border to panel_2
-        maxUnitX = (int) Math.ceil(this.panel_2.getWidth() / unitX);
-        maxUnitY = (int) Math.ceil(this.panel_2.getHeight() / unitY);
+        maxUnitX = (int) Math.ceil(panel_2.getWidth() / unitX);
+        maxUnitY = (int) Math.ceil(panel_2.getHeight() / unitY);
         for (int x = 0; x < maxUnitX; x++) {
             for (int y = 0; y < maxUnitY; y++) {
                 if (x == 0 && !(y == 0 || y == maxUnitY - 1)) {
-                    this.panel_2.putGameObject(new Wall(this.app, scale, image, x * unitX, y * unitY, true));
+                    panel_2.putGameObject(new Wall(this.app, scale, image, x * unitX, y * unitY, true));
                 }
             }
         }
     }
 
-    private void addPowerUps(double scale) {
+    private void addPowerUps(JCustomPanel panel_1, JCustomPanel panel_2, double scale) {
         BufferedImage image = this.app.getResource("Gameworld/powerup");
         for (int i = 0; i < 3; i++) {
             // add powerups to panel_1
-            this.panel_1.putGameObject(new PowerUp(this.app, scale, image, (int) Math.round(Math.random() * (this.panel_1.getWidth() * 0.8) + this.panel_1.getWidth() * 0.1), (int) Math.round(Math.random() * (this.panel_1.getHeight() * 0.8) + this.panel_1.getWidth() * 0.1), "health"));
+            panel_1.putGameObject(new PowerUp(this.app, scale, image, (int) Math.round(Math.random() * (panel_1.getWidth() * 0.8) + panel_1.getWidth() * 0.1), (int) Math.round(Math.random() * (panel_1.getHeight() * 0.8) + panel_1.getWidth() * 0.1), "health"));
             // add powerups to panel_2
-            this.panel_2.putGameObject(new PowerUp(this.app, scale, image, (int) Math.round(Math.random() * (this.panel_2.getWidth() * 0.8) + this.panel_2.getWidth() * 0.1), (int) Math.round(Math.random() * (this.panel_2.getHeight() * 0.8) + this.panel_2.getWidth() * 0.1), "health"));
+            panel_2.putGameObject(new PowerUp(this.app, scale, image, (int) Math.round(Math.random() * (panel_2.getWidth() * 0.8) + panel_2.getWidth() * 0.1), (int) Math.round(Math.random() * (panel_2.getHeight() * 0.8) + panel_2.getWidth() * 0.1), "health"));
         }
     }
 
-    private void addTanks(double scale) {
+    private void addTanks(JCustomPanel panel_1, JCustomPanel panel_2, Tank tank_1, Tank tank_2, double scale) {
+        Tank tank;
         // set tank_1 to panel_1
-        this.tank_1 = new Tank(this.app, scale, this.app.getResource("Gameworld/tank_1"), this.panel_1.getWidth() / 2, this.panel_1.getHeight() / 2, 0, 0, 0, this.panel_1.getWidth(), this.panel_1.getHeight());
-        this.panel_1.putGameMovableObject(this.tank_1);
+        tank = new Tank(this.app, scale, this.app.getResource("Gameworld/tank_1"), panel_1.getWidth() / 2, panel_1.getHeight() / 2, 0, 0, 0, panel_1.getWidth(), panel_1.getHeight());
+        if (panel_1.equals(this.panel_1)) {
+            this.tank_1 = tank;
+            panel_1.putGameMovableObject(this.tank_1);
+        } else if (panel_1.equals(this.mini_panel_1)) {
+            this.mini_tank_1 = tank;
+            panel_1.putGameMovableObject(this.mini_tank_1);
+        }
         // set tank_2 to panel_2
-        this.tank_2 = new Tank(this.app, scale, this.app.getResource("Gameworld/tank_2"), this.panel_2.getWidth() / 2, this.panel_2.getHeight() / 2, 0, 0, 180, this.panel_2.getWidth(), this.panel_2.getHeight());
-        this.panel_2.putGameMovableObject(this.tank_2);
+        tank = new Tank(this.app, scale, this.app.getResource("Gameworld/tank_2"), panel_2.getWidth() / 2, panel_2.getHeight() / 2, 0, 0, 180, panel_2.getWidth(), panel_2.getHeight());
+        if (panel_2.equals(this.panel_2)) {
+            this.tank_2 = tank;
+            panel_2.putGameMovableObject(this.tank_2);
+        } else if (panel_2.equals(this.mini_panel_2)) {
+            this.mini_tank_2 = tank;
+            panel_2.putGameMovableObject(this.mini_tank_2);
+        }
     }
 
     private void playerInfoBar() {
@@ -238,45 +311,68 @@ public class Gameworld extends JContainer implements ActionListener {
         this.tank_2_health.setText(((this.tank_2.getHealth() % 100.0 == 0) ? (this.tank_2.getHealth() / 100 - 1) : (this.tank_2.getHealth() / 100)) + " ❤");
     }
 
-    public Tank getPlayerTank(int player) {
+    public void setPlayerTankControl(int player, String action, boolean value) {
         switch (player) {
             case 1:
-                return this.tank_1;
+                try {
+                    this.tank_1.getClass().getDeclaredMethod(action, boolean.class).invoke(this.tank_1, value);
+                    this.mini_tank_1.getClass().getDeclaredMethod(action, boolean.class).invoke(this.mini_tank_1, value);
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                    System.out.println(this.getClass().getSimpleName() + " - setPlayerTankControl() - " + e);
+                }
+                break;
             case 2:
-                return this.tank_2;
+                try {
+                    this.tank_2.getClass().getDeclaredMethod(action, boolean.class).invoke(this.tank_2, value);
+                    this.mini_tank_2.getClass().getDeclaredMethod(action, boolean.class).invoke(this.mini_tank_2, value);
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                    System.out.println(this.getClass().getSimpleName() + " - setPlayerTankControl() - " + e);
+                }
+                break;
+            default:
+                throw new IllegalArgumentException();
         }
-        throw new IllegalArgumentException();
     }
 
-    public void addPlayerBullet(Tank tank, double scale, int x, int y, int vx, int vy, int angle, int damage) {
-        if (tank.equals(getPlayerTank(1))) {
+    private void addPlayerBullet(JCustomPanel panel_1, JCustomPanel panel_2, Tank tank, double scale, int x, int y, int vx, int vy, int angle, int damage) {
+        if (tank.equals(this.tank_1) || tank.equals(this.mini_tank_1)) {
             System.out.println(this.getClass().getSimpleName() + " - addPlayerBullet() - Player 1 - x,y,vx,vy,angle: " + x + "," + y + "," + vx + "," + vy + "," + angle);
-            this.panel_1.putGameMovableObject(new Bullet(this.app, scale, this.app.getResource("Gameworld/bullet"), x, y, vx, vy, angle, this.panel_1.getWidth(), this.panel_1.getHeight(), damage));
-        } else if (tank.equals(getPlayerTank(2))) {
+            panel_1.putGameMovableObject(new Bullet(this.app, scale, this.app.getResource("Gameworld/bullet"), x, y, vx, vy, angle, panel_1.getWidth(), panel_1.getHeight(), damage));
+        } else if (tank.equals(this.tank_2) || tank.equals(this.mini_tank_2)) {
             System.out.println(this.getClass().getSimpleName() + " - addPlayerBullet() - Player 2 - x,y,vx,vy,angle: " + x + "," + y + "," + vx + "," + vy + "," + angle);
-            this.panel_2.putGameMovableObject(new Bullet(this.app, scale, this.app.getResource("Gameworld/bullet"), x, y, vx, vy, angle, this.panel_2.getWidth(), this.panel_2.getHeight(), damage));
+            panel_2.putGameMovableObject(new Bullet(this.app, scale, this.app.getResource("Gameworld/bullet"), x, y, vx, vy, angle, panel_2.getWidth(), panel_2.getHeight(), damage));
         } else {
             throw new IllegalArgumentException();
         }
     }
 
-    public void movePlayerBullet(Bullet bullet, double scale, int x, int y, int vx, int vy, int angle, int damage) {
+    public void addPlayerBullet(Tank tank, int x, int y, int vx, int vy, int angle, int damage) {
+        addPlayerBullet(this.panel_1, this.panel_2, tank, 1.0, x, y, vx, vy, angle, damage);
+        addPlayerBullet(this.mini_panel_1, this.mini_panel_2, tank, 0.25, x, y, vx, vy, angle, damage);
+    }
+
+    private void movePlayerBullet(JCustomPanel panel_1, JCustomPanel panel_2, Bullet bullet, double scale, int x, int y, int vx, int vy, int angle, int damage) {
         // move from panel_1 to panel_2
-        if (this.panel_1.getGameMovableObjects().contains(bullet)) {
+        if (panel_1.getGameMovableObjects().contains(bullet)) {
             System.out.println(this.getClass().getSimpleName() + " - movePlayerBullet() - Player 1 - x,y,vx,vy,angle: " + x + "," + y + "," + vx + "," + vy + "," + angle);
             // remove bullet from panel_1
-            this.panel_1.removeGameMovableObject(bullet);
-            this.panel_2.putGameMovableObject(new Bullet(this.app, scale, this.app.getResource("Gameworld/bullet"), x - this.panel_2.getWidth(), y, vx, vy, angle, this.panel_2.getWidth(), this.panel_1.getHeight(), damage));
+            panel_1.removeGameMovableObject(bullet);
+            panel_2.putGameMovableObject(new Bullet(this.app, scale, this.app.getResource("Gameworld/bullet"), x - panel_2.getWidth(), y, vx, vy, angle, panel_2.getWidth(), panel_1.getHeight(), damage));
         }
         // move from panel_2 to panel_1
-        else if (this.panel_2.getGameMovableObjects().contains(bullet)) {
+        else if (panel_2.getGameMovableObjects().contains(bullet)) {
             System.out.println(this.getClass().getSimpleName() + " - movePlayerBullet() - Player 2 - x,y,vx,vy,angle: " + x + "," + y + "," + vx + "," + vy + "," + angle);
             // remove bullet from panel_2
-            this.panel_2.removeGameMovableObject(bullet);
-            this.panel_1.putGameMovableObject(new Bullet(this.app, scale, this.app.getResource("Gameworld/bullet"), x + this.panel_1.getWidth(), y, vx, vy, angle, this.panel_1.getWidth(), this.panel_1.getHeight(), damage));
+            panel_2.removeGameMovableObject(bullet);
+            panel_1.putGameMovableObject(new Bullet(this.app, scale, this.app.getResource("Gameworld/bullet"), x + panel_1.getWidth(), y, vx, vy, angle, panel_1.getWidth(), panel_1.getHeight(), damage));
         } else {
             throw new IllegalArgumentException();
         }
+    }
+
+    public void movePlayerBullet(Bullet bullet, int x, int y, int vx, int vy, int angle, int damage) {
+        movePlayerBullet(this.panel_1, this.panel_2, bullet, 1.0, x, y, vx, vy, angle, damage);
+        movePlayerBullet(this.mini_panel_1, this.mini_panel_2, bullet, 0.25, x, y, vx, vy, angle, damage);
     }
 
     private void checkWinner() {
@@ -311,6 +407,10 @@ public class Gameworld extends JContainer implements ActionListener {
     protected void close() {
         this.panel_1.timer.stop();
         this.panel_2.timer.stop();
+        this.mini_panel_1.timer.stop();
+        this.mini_panel_2.timer.stop();
+        this.mini_frame.setVisible(false);
+        this.mini_frame.dispose();
         this.timer.stop();
         super.close();
     }
