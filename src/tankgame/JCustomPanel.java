@@ -12,6 +12,7 @@ import tankgame.gameobject.GameMovableObject;
 
 public class JCustomPanel extends JPanel implements ActionListener {
     public Timer timer;
+
     private CopyOnWriteArrayList<GameObject> gameObjects;
     private CopyOnWriteArrayList<GameMovableObject> gameMovableObjects;
 
