@@ -61,9 +61,6 @@ public class Gameworld extends JContainer implements ActionListener {
         // set frame size
         Dimension size;
         switch (this.app.getScale()) {
-            case 1:
-                size = new Dimension(1280, 960);
-                break;
             case 2:
                 size = new Dimension(1920, 1440);
                 break;
@@ -125,9 +122,6 @@ public class Gameworld extends JContainer implements ActionListener {
         this.mini_frame.setResizable(false);
         // set frame size
         switch (this.app.getScale()) {
-            case 1:
-                size = new Dimension(320, 240);
-                break;
             case 2:
                 size = new Dimension(480, 360);
                 break;
@@ -289,7 +283,6 @@ public class Gameworld extends JContainer implements ActionListener {
         // set tank_1_health to panel_1
         this.tank_1_health = new JLabel();
         this.tank_1_health.setFont(font);
-        //this.tank_1_health.setForeground(Color.GRAY);
         this.tank_1_health.setHorizontalAlignment(JLabel.LEFT);
         this.tank_1_health.setVerticalAlignment(JLabel.BOTTOM);
         this.tank_1_health.setOpaque(false);
@@ -298,7 +291,6 @@ public class Gameworld extends JContainer implements ActionListener {
         // set tank_2_health to panel_2
         this.tank_2_health = new JLabel();
         this.tank_2_health.setFont(font);
-        //this.tank_2_health.setForeground(Color.GRAY);
         this.tank_2_health.setHorizontalAlignment(JLabel.RIGHT);
         this.tank_2_health.setVerticalAlignment(JLabel.BOTTOM);
         this.tank_2_health.setOpaque(false);
