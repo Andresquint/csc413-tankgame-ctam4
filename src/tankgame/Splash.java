@@ -41,6 +41,7 @@ public class Splash extends JContainer {
                 break;
         }
         this.frame.setSize(size);
+        System.out.println(this.getClass().getSimpleName() + " - Splash() - Set frame size: " + this.frame.getWidth() + "x" + this.frame.getHeight());
         // create JPanel object
         this.panel = new JPanel();
         // set panel size
