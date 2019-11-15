@@ -71,7 +71,8 @@ public class Gameworld extends JContainer implements ActionListener {
                 size = new Dimension(1280, 960);
                 break;
         }
-        this.frame.setSize(size);
+        this.frame.getContentPane().setPreferredSize(size);
+        this.frame.pack();
         System.out.println(this.getClass().getSimpleName() + " - Gameworld() - Set frame size: " + this.frame.getWidth() + "x" + this.frame.getHeight());
         // show game rules
         showRules();
@@ -122,7 +123,8 @@ public class Gameworld extends JContainer implements ActionListener {
         // set frame resizable
         this.mini_frame.setResizable(false);
         // set frame size
-        this.mini_frame.setSize(new Dimension((int) Math.round(this.frame.getWidth() * 0.5), (int) Math.round(this.frame.getHeight() * 0.5)));
+        this.mini_frame.getContentPane().setPreferredSize(new Dimension((int) Math.round(this.frame.getWidth() * 0.5), (int) Math.round(this.frame.getHeight() * 0.5)));
+        this.mini_frame.pack();
         System.out.println(this.getClass().getSimpleName() + " - Gameworld() - Set mini frame size: " + this.mini_frame.getWidth() + "x" + this.mini_frame.getHeight());
         // create JCustomPanel objects for mini
         this.mini_panel_1 = new JCustomPanel();
