@@ -11,8 +11,8 @@ import tankgame.Launcher;
 public abstract class GameMovableObject extends GameObject {
     protected int vx, vy, angle, maxX, maxY;
 
-    protected GameMovableObject(Launcher app, BufferedImage image, int x, int y, int vx, int vy, int angle, int maxX, int maxY) {
-        super(app, image, x, y);
+    protected GameMovableObject(Launcher app, double scale, BufferedImage image, int x, int y, int vx, int vy, int angle, int maxX, int maxY) {
+        super(app, scale, image, x, y);
         this.vx = vx;
         this.vy = vy;
         this.angle = angle;

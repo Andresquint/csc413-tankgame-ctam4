@@ -7,18 +7,19 @@ import java.lang.Math;
 import tankgame.Launcher;
 
 public abstract class GameObject {
-    protected int width, height;
+    protected double scale;
     protected Launcher app;
     protected BufferedImage image;
-    protected int x, y;
+    protected int width, height, x, y;
 
-    protected GameObject(Launcher app, BufferedImage image, int x, int y) {
+    protected GameObject(Launcher app, double scale, BufferedImage image, int x, int y) {
         this.app = app;
+        this.scale = scale;
         this.image = image;
+        this.width = (int) Math.round(this.app.getUnitSize() * this.app.getScale() * this.scale);
+        this.height = (int) Math.round(this.app.getUnitSize() * this.app.getScale() * this.scale);
         this.x = x;
         this.y = y;
-        this.width = (int) Math.round(this.app.getUnitSize() * this.app.getScale());
-        this.height = (int) Math.round(this.app.getUnitSize() * this.app.getScale());
     }
 
     public int getWidth() {

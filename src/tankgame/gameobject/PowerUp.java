@@ -7,8 +7,8 @@ import tankgame.Launcher;
 public class PowerUp extends GameObject {
     String type;
 
-    public PowerUp(Launcher app, BufferedImage image, int x, int y, String type) {
-        super(app, image, x, y);
+    public PowerUp(Launcher app, double scale, BufferedImage image, int x, int y, String type) {
+        super(app, scale, image, x, y);
         this.type = type;
     }
 

@@ -16,8 +16,8 @@ public class Tank extends GameMovableObject {
     private int health;
     private boolean left, up, down, right, fire;
 
-    public Tank(Launcher app, BufferedImage image, int x, int y, int vx, int vy, int angle, int maxX, int maxY) {
-        super(app, image, x, y, vx, vy, angle, maxX, maxY);
+    public Tank(Launcher app, double scale, BufferedImage image, int x, int y, int vx, int vy, int angle, int maxX, int maxY) {
+        super(app, scale, image, x, y, vx, vy, angle, maxX, maxY);
         this.health = 300;
         this.left = this.up = this.down = this.right = this.fire = false;
     }
@@ -170,7 +170,7 @@ public class Tank extends GameMovableObject {
         // draw health bar
         Graphics2D g2d = (Graphics2D) g;
         // left
-        Rectangle rect_1 = new Rectangle(this.x, this.y - 10 * this.app.getScale(), (int) Math.round(this.width * ((this.health / 100.0 > 0 && this.health % 100.0 == 0) ? 1.0 : (this.health % 100.0 / 100))), (int) Math.round(this.height * 0.1));
+        Rectangle rect_1 = new Rectangle(this.x, (int) Math.round(this.y - 10 * this.app.getScale() * this.scale), (int) Math.round(this.width * ((this.health / 100.0 > 0 && this.health % 100.0 == 0) ? 1.0 : (this.health % 100.0 / 100))), (int) Math.round(this.height * 0.1));
         if (rect_1.getWidth() > 0) {
             g2d.setColor(Color.GREEN);
             g2d.fillRect((int) Math.round(rect_1.getX()), (int) Math.round(rect_1.getY()), (int) Math.round(rect_1.getWidth()), (int) Math.round(rect_1.getHeight()));

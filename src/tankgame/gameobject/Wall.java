@@ -7,8 +7,8 @@ import tankgame.Launcher;
 public class Wall extends GameObject {
     private boolean isBreakable;
 
-    public Wall(Launcher app, BufferedImage image, int x, int y, boolean isBreakable) {
-        super(app, image, x, y);
+    public Wall(Launcher app, double scale, BufferedImage image, int x, int y, boolean isBreakable) {
+        super(app, scale, image, x, y);
         this.isBreakable = isBreakable;
     }
 

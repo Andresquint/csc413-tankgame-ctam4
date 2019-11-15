@@ -10,8 +10,8 @@ public class Bullet extends GameMovableObject {
 
     private int damage;
 
-    public Bullet(Launcher app, BufferedImage image, int x, int y, int vx, int vy, int angle, int maxX, int maxY, int damage) {
-        super(app, image, x, y, vx, vy, angle, maxX, maxY);
+    public Bullet(Launcher app, double scale, BufferedImage image, int x, int y, int vx, int vy, int angle, int maxX, int maxY, int damage) {
+        super(app, scale, image, x, y, vx, vy, angle, maxX, maxY);
         this.damage = damage;
     }
 
