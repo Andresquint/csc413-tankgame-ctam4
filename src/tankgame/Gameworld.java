@@ -91,7 +91,9 @@ public class Gameworld extends JContainer implements ActionListener {
         this.panel_1.setVisible(true);
         this.panel_2.setVisible(true);
         // set GameObjects
-        addGameObjects();
+        addWalls(1.0);
+        addPowerUps(1.0);
+        addTanks(1.0);
         // set player info bar
         playerInfoBar();
         // create JSplitPane object
@@ -114,20 +116,20 @@ public class Gameworld extends JContainer implements ActionListener {
         JOptionPane.showMessageDialog(this.frame, "<html><body>" + this.app.getString("Gameworld/rule_1") + "<br>" + this.app.getString("Gameworld/rule_2") + "<br>" + this.app.getString("Gameworld/rule_3") + "</body></html>", this.app.getString("Gameworld/rules"), JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private void addGameObjects() {
+    private void addWalls(double scale) {
         BufferedImage image;
         int unitX, unitY, maxUnitX, maxUnitY;
         // get unitX & unitY for unbreakable wall
         image = this.app.getResource("Gameworld/wall_1");
-        unitX = (int) Math.round(this.app.getUnitSize() * this.app.getScale());
-        unitY = (int) Math.round(this.app.getUnitSize() * this.app.getScale());
+        unitX = (int) Math.round(this.app.getUnitSize() * this.app.getScale() * scale);
+        unitY = (int) Math.round(this.app.getUnitSize() * this.app.getScale() * scale);
         // add unbreakable walls on border to panel_1
         maxUnitX = (int) Math.ceil(this.panel_1.getWidth() / unitX);
         maxUnitY = (int) Math.ceil(this.panel_1.getHeight() / unitY);
         for (int x = 0; x < maxUnitX; x++) {
             for (int y = 0; y < maxUnitY; y++) {
                 if (x == 0 || y == 0 || y == maxUnitY - 1) {
-                    this.panel_1.putGameObject(new Wall(this.app, image, x * unitX, y * unitY, false));
+                    this.panel_1.putGameObject(new Wall(this.app, scale, image, x * unitX, y * unitY, false));
                 }
             }
         }
@@ -137,21 +139,21 @@ public class Gameworld extends JContainer implements ActionListener {
         for (int x = 0; x < maxUnitX; x++) {
             for (int y = 0; y < maxUnitY; y++) {
                 if (x == maxUnitX - 1 || y == 0 || y == maxUnitY - 1) {
-                    this.panel_2.putGameObject(new Wall(this.app, image, x * unitX, y * unitY, false));
+                    this.panel_2.putGameObject(new Wall(this.app, scale, image, x * unitX, y * unitY, false));
                 }
             }
         }
         // get unitX & unitY for breakable wall
         image = this.app.getResource("Gameworld/wall_2");
-        unitX = (int) Math.round(this.app.getUnitSize() * this.app.getScale());
-        unitY = (int) Math.round(this.app.getUnitSize() * this.app.getScale());
+        unitX = (int) Math.round(this.app.getUnitSize() * this.app.getScale() * scale);
+        unitY = (int) Math.round(this.app.getUnitSize() * this.app.getScale() * scale);
         // add breakable walls on border to panel_1
         maxUnitX = (int) Math.ceil(this.panel_1.getWidth() / unitX);
         maxUnitY = (int) Math.ceil(this.panel_1.getHeight() / unitY);
         for (int x = 0; x < maxUnitX; x++) {
             for (int y = 0; y < maxUnitY; y++) {
                 if (x == maxUnitX - 1 && !(y == 0 || y == maxUnitY - 1)) {
-                    this.panel_1.putGameObject(new Wall(this.app, image, x * unitX, y * unitY, true));
+                    this.panel_1.putGameObject(new Wall(this.app, scale, image, x * unitX, y * unitY, true));
                 }
             }
         }
@@ -161,23 +163,29 @@ public class Gameworld extends JContainer implements ActionListener {
         for (int x = 0; x < maxUnitX; x++) {
             for (int y = 0; y < maxUnitY; y++) {
                 if (x == 0 && !(y == 0 || y == maxUnitY - 1)) {
-                    this.panel_2.putGameObject(new Wall(this.app, image, x * unitX, y * unitY, true));
+                    this.panel_2.putGameObject(new Wall(this.app, scale, image, x * unitX, y * unitY, true));
                 }
             }
         }
-        // set tank_1 to panel_1
-        this.tank_1 = new Tank(this.app, this.app.getResource("Gameworld/tank_1"), this.panel_1.getWidth() / 2, this.panel_1.getHeight() / 2, 0, 0, 0, this.panel_1.getWidth(), this.panel_1.getHeight());
-        this.panel_1.putGameMovableObject(this.tank_1);
-        // set tank_2 to panel_2
-        this.tank_2 = new Tank(this.app, this.app.getResource("Gameworld/tank_2"), this.panel_2.getWidth() / 2, this.panel_2.getHeight() / 2, 0, 0, 180, this.panel_2.getWidth(), this.panel_2.getHeight());
-        this.panel_2.putGameMovableObject(this.tank_2);
-        image = this.app.getResource("Gameworld/powerup");
+    }
+
+    private void addPowerUps(double scale) {
+        BufferedImage image = this.app.getResource("Gameworld/powerup");
         for (int i = 0; i < 3; i++) {
             // add powerups to panel_1
-            this.panel_1.putGameObject(new PowerUp(this.app, image, (int) Math.round(Math.random() * (this.panel_1.getWidth() * 0.8) + this.panel_1.getWidth() * 0.1), (int) Math.round(Math.random() * (this.panel_1.getHeight() * 0.8) + this.panel_1.getWidth() * 0.1), "health"));
+            this.panel_1.putGameObject(new PowerUp(this.app, scale, image, (int) Math.round(Math.random() * (this.panel_1.getWidth() * 0.8) + this.panel_1.getWidth() * 0.1), (int) Math.round(Math.random() * (this.panel_1.getHeight() * 0.8) + this.panel_1.getWidth() * 0.1), "health"));
             // add powerups to panel_2
-            this.panel_2.putGameObject(new PowerUp(this.app, image, (int) Math.round(Math.random() * (this.panel_2.getWidth() * 0.8) + this.panel_2.getWidth() * 0.1), (int) Math.round(Math.random() * (this.panel_2.getHeight() * 0.8) + this.panel_2.getWidth() * 0.1), "health"));
+            this.panel_2.putGameObject(new PowerUp(this.app, scale, image, (int) Math.round(Math.random() * (this.panel_2.getWidth() * 0.8) + this.panel_2.getWidth() * 0.1), (int) Math.round(Math.random() * (this.panel_2.getHeight() * 0.8) + this.panel_2.getWidth() * 0.1), "health"));
         }
+    }
+
+    private void addTanks(double scale) {
+        // set tank_1 to panel_1
+        this.tank_1 = new Tank(this.app, scale, this.app.getResource("Gameworld/tank_1"), this.panel_1.getWidth() / 2, this.panel_1.getHeight() / 2, 0, 0, 0, this.panel_1.getWidth(), this.panel_1.getHeight());
+        this.panel_1.putGameMovableObject(this.tank_1);
+        // set tank_2 to panel_2
+        this.tank_2 = new Tank(this.app, scale, this.app.getResource("Gameworld/tank_2"), this.panel_2.getWidth() / 2, this.panel_2.getHeight() / 2, 0, 0, 180, this.panel_2.getWidth(), this.panel_2.getHeight());
+        this.panel_2.putGameMovableObject(this.tank_2);
     }
 
     private void playerInfoBar() {
@@ -240,32 +248,32 @@ public class Gameworld extends JContainer implements ActionListener {
         throw new IllegalArgumentException();
     }
 
-    public void addPlayerBullet(Tank tank, int x, int y, int vx, int vy, int angle, int damage) {
+    public void addPlayerBullet(Tank tank, double scale, int x, int y, int vx, int vy, int angle, int damage) {
         if (tank.equals(getPlayerTank(1))) {
             System.out.println(this.getClass().getSimpleName() + " - addPlayerBullet() - Player 1 - x,y,vx,vy,angle: " + x + "," + y + "," + vx + "," + vy + "," + angle);
-            this.panel_1.putGameMovableObject(new Bullet(this.app, this.app.getResource("Gameworld/bullet"), x, y, vx, vy, angle, this.panel_1.getWidth(), this.panel_1.getHeight(), damage));
+            this.panel_1.putGameMovableObject(new Bullet(this.app, scale, this.app.getResource("Gameworld/bullet"), x, y, vx, vy, angle, this.panel_1.getWidth(), this.panel_1.getHeight(), damage));
         } else if (tank.equals(getPlayerTank(2))) {
             System.out.println(this.getClass().getSimpleName() + " - addPlayerBullet() - Player 2 - x,y,vx,vy,angle: " + x + "," + y + "," + vx + "," + vy + "," + angle);
-            this.panel_2.putGameMovableObject(new Bullet(this.app, this.app.getResource("Gameworld/bullet"), x, y, vx, vy, angle, this.panel_2.getWidth(), this.panel_2.getHeight(), damage));
+            this.panel_2.putGameMovableObject(new Bullet(this.app, scale, this.app.getResource("Gameworld/bullet"), x, y, vx, vy, angle, this.panel_2.getWidth(), this.panel_2.getHeight(), damage));
         } else {
             throw new IllegalArgumentException();
         }
     }
 
-    public void movePlayerBullet(Bullet bullet, int x, int y, int vx, int vy, int angle, int damage) {
+    public void movePlayerBullet(Bullet bullet, double scale, int x, int y, int vx, int vy, int angle, int damage) {
         // move from panel_1 to panel_2
         if (this.panel_1.getGameMovableObjects().contains(bullet)) {
             System.out.println(this.getClass().getSimpleName() + " - movePlayerBullet() - Player 1 - x,y,vx,vy,angle: " + x + "," + y + "," + vx + "," + vy + "," + angle);
             // remove bullet from panel_1
             this.panel_1.removeGameMovableObject(bullet);
-            this.panel_2.putGameMovableObject(new Bullet(this.app, this.app.getResource("Gameworld/bullet"), x - this.panel_2.getWidth(), y, vx, vy, angle, this.panel_2.getWidth(), this.panel_1.getHeight(), damage));
+            this.panel_2.putGameMovableObject(new Bullet(this.app, scale, this.app.getResource("Gameworld/bullet"), x - this.panel_2.getWidth(), y, vx, vy, angle, this.panel_2.getWidth(), this.panel_1.getHeight(), damage));
         }
         // move from panel_2 to panel_1
         else if (this.panel_2.getGameMovableObjects().contains(bullet)) {
             System.out.println(this.getClass().getSimpleName() + " - movePlayerBullet() - Player 2 - x,y,vx,vy,angle: " + x + "," + y + "," + vx + "," + vy + "," + angle);
             // remove bullet from panel_2
             this.panel_2.removeGameMovableObject(bullet);
-            this.panel_1.putGameMovableObject(new Bullet(this.app, this.app.getResource("Gameworld/bullet"), x + this.panel_1.getWidth(), y, vx, vy, angle, this.panel_1.getWidth(), this.panel_1.getHeight(), damage));
+            this.panel_1.putGameMovableObject(new Bullet(this.app, scale, this.app.getResource("Gameworld/bullet"), x + this.panel_1.getWidth(), y, vx, vy, angle, this.panel_1.getWidth(), this.panel_1.getHeight(), damage));
         } else {
             throw new IllegalArgumentException();
         }
