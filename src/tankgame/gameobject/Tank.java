@@ -55,19 +55,27 @@ public class Tank extends GameMovableObject {
     public void update() {
         if (this.left) {
             turnLeft();
+            toggleLeft(false);
+            toggleUp(false);
+            toggleDown(false);
         }
         if (this.up) {
             drive();
+            toggleUp(false);
         }
         if (this.down) {
             reverse();
+            toggleDown(false);
         }
         if (this.right) {
             turnRight();
+            toggleRight(false);
+            toggleUp(false);
+            toggleDown(false);
         }
         if (this.fire) {
             shoot();
-            this.fire = false;
+            toggleFire(false);
         }
     }
 
