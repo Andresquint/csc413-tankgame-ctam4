@@ -257,6 +257,7 @@ public class Gameworld extends JContainer implements ActionListener {
         player_1.setLayout(new BorderLayout());
         player_1.setText("< " + this.app.getString("Gameworld/player_1") + " >");
         player_1.setFont(font);
+        player_1.setForeground(Color.WHITE);
         player_1.setHorizontalAlignment(JLabel.CENTER);
         player_1.setVerticalAlignment(JLabel.BOTTOM);
         player_1.setOpaque(false);
@@ -267,6 +268,7 @@ public class Gameworld extends JContainer implements ActionListener {
         player_2.setLayout(new BorderLayout());
         player_2.setText("< " + this.app.getString("Gameworld/player_2") + " >");
         player_2.setFont(font);
+        player_2.setForeground(Color.WHITE);
         player_2.setHorizontalAlignment(JLabel.CENTER);
         player_2.setVerticalAlignment(JLabel.BOTTOM);
         player_2.setOpaque(false);
@@ -276,6 +278,7 @@ public class Gameworld extends JContainer implements ActionListener {
         // set tank_1_health to panel_1
         this.tank_1_health = new JLabel();
         this.tank_1_health.setFont(font);
+        this.tank_1_health.setForeground(Color.WHITE);
         this.tank_1_health.setHorizontalAlignment(JLabel.LEFT);
         this.tank_1_health.setVerticalAlignment(JLabel.BOTTOM);
         this.tank_1_health.setOpaque(false);
@@ -284,6 +287,7 @@ public class Gameworld extends JContainer implements ActionListener {
         // set tank_2_health to panel_2
         this.tank_2_health = new JLabel();
         this.tank_2_health.setFont(font);
+        this.tank_2_health.setForeground(Color.WHITE);
         this.tank_2_health.setHorizontalAlignment(JLabel.RIGHT);
         this.tank_2_health.setVerticalAlignment(JLabel.BOTTOM);
         this.tank_2_health.setOpaque(false);
