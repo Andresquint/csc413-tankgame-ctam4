@@ -32,12 +32,19 @@ public class Tank extends GameMovableObject {
                 return true;
             case "Wall":
                 this.left = this.up = this.down = this.right = this.fire = false;
-                int vx = (int) Math.round(this.R * this.app.getScale() * this.scale * Math.cos(Math.toRadians(this.angle)));
-                int vy = (int) Math.round(this.R * this.app.getScale() * this.scale * Math.sin(Math.toRadians(this.angle)));
-                if (vx > 0 || vy > 0) {
-                    reverse();
-                } else if (vx < 0 || vy < 0){
-                    drive();
+                switch (this.lastDirection) {
+                    case 1:
+                        turnRight();
+                        break;
+                    case 2:
+                        reverse();
+                        break;
+                    case 3:
+                        drive();
+                        break;
+                    case 4:
+                        turnLeft();
+                        break;
                 }
                 return false;
         }
@@ -55,20 +62,24 @@ public class Tank extends GameMovableObject {
     public void update() {
         if (this.left) {
             turnLeft();
+            this.lastDirection = 1;
             toggleLeft(false);
             toggleUp(false);
             toggleDown(false);
         }
         if (this.up) {
             drive();
+            this.lastDirection = 2;
             toggleUp(false);
         }
         if (this.down) {
             reverse();
+            this.lastDirection = 3;
             toggleDown(false);
         }
         if (this.right) {
             turnRight();
+            this.lastDirection = 4;
             toggleRight(false);
             toggleUp(false);
             toggleDown(false);
